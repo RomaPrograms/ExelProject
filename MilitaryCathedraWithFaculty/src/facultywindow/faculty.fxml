@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facultywindow.FacultyController">
+   <children>
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="97.0" prefHeight="488.0" prefWidth="938.0">
+        <columns>
+          <TableColumn fx:id="firstColumn" prefWidth="84.99998474121094" text="Факультет" />
+          <TableColumn prefWidth="167.0" text="Учебная&#10;работа">
+               <columns>
+                  <TableColumn fx:id="secondColumn" prefWidth="65.0" text="R-ф" />
+                  <TableColumn fx:id="thirdColumn" prefWidth="65.0" text="R-ср" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="134.0" text="Методическая&#10;работа">
+               <columns>
+                  <TableColumn fx:id="forthColumn" prefWidth="65.0" text="R-ф" />
+                  <TableColumn fx:id="fifthColumn" prefWidth="65.0" text="R-ср" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="141.0" text="Идеологическая&#10;работа">
+               <columns>
+                  <TableColumn fx:id="sixthColumn" prefWidth="65.0" text="R-ф" />
+                  <TableColumn fx:id="seventhColumn" prefWidth="65.0" text="R-ср" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="136.0" text="Научная&#10;работа">
+               <columns>
+                  <TableColumn fx:id="eighthColumn" prefWidth="65.0" text="R-ф" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="138.0" text="МТБ">
+               <columns>
+                  <TableColumn fx:id="ninthColumn" prefWidth="65.0" text="R-ф" />
+                  <TableColumn fx:id="tenthColumn" prefWidth="65.0" text="R-ср" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="87.0" text="ВС и&#10;ОБВС">
+               <columns>
+                  <TableColumn fx:id="eleventhColumn" prefWidth="65.0" text="R-ф" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="75.0" text="СМР">
+               <columns>
+                  <TableColumn fx:id="twelfthColumn" prefWidth="65.0" text="R-ф" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="83.0" text="Рейтинг">
+               <columns>
+                  <TableColumn fx:id="thirteenthColumn" prefWidth="65.0" text="R-ф" />
+               </columns>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Button fx:id="backButton" cancelButton="true" layoutX="861.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="85.0" text="Назад" />
+      <Button fx:id="additionalInformationButton" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#changeConstants" prefHeight="76.0" prefWidth="215.0" text="Добавить информацию о среднем значении на всех факультетах" wrapText="true" />
+   </children>
+</AnchorPane>

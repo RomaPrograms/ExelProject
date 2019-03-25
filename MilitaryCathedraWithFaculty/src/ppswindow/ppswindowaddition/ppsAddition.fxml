@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1105.0" prefHeight="700.0" prefWidth="1105.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ppswindow.ppswindowaddition.ppsAdditionController">
+   <children>
+      <TabPane layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1105.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+         <tabs>
+            <Tab text="Научно педагогический потенциал">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="661.0" prefWidth="1374.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="17.0" prefHeight="35.0" prefWidth="48.0" text="Год: ">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label fx:id="yearLabel" layoutX="62.0" layoutY="17.0" prefHeight="35.0" prefWidth="82.0" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label layoutX="154.0" layoutY="17.0" prefHeight="35.0" prefWidth="132.0" text="Должность: ">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label fx:id="categoryLabel" layoutX="286.0" layoutY="17.0" prefHeight="35.0" prefWidth="136.0" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label layoutX="435.0" layoutY="17.0" prefHeight="35.0" prefWidth="60.0" text="ФИО:">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label fx:id="nameLabel" layoutX="506.0" layoutY="17.0" prefHeight="35.0" prefWidth="409.0" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Button cancelButton="true" layoutX="1006.0" layoutY="17.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="85.0" text="Back" AnchorPane.rightAnchor="14.0" />
+                        <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="110.0" prefHeight="450.0" prefWidth="1084.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="110.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="964.0" minWidth="10.0" prefWidth="964.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="26.0" prefWidth="70.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="647.0" text="Уровень профессиональной подготовки преподавателя (балл)" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="9.0" prefHeight="32.0" prefWidth="508.0" text="Наличие степени &quot;Магистр&quot;" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="9.0" prefHeight="32.0" prefWidth="508.0" text="Наличие ученого звания &quot;Доцент&quot;" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="9.0" prefHeight="32.0" prefWidth="508.0" text="Наличие ученого звания &quot;Профессор&quot;" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="9.0" prefHeight="32.0" prefWidth="508.0" text="Наличие ученой степени &quot;Кандидат наук&quot;" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="9.0" prefHeight="32.0" prefWidth="508.0" text="Наличие ученой степени &quot;Доктор наук&quot;">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="38.0" prefHeight="11.0" prefWidth="959.0" text="Обучение в докторантуре/адъюнтуре/магистратуре" wrapText="true" GridPane.rowIndex="9">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="38.0" prefHeight="32.0" prefWidth="508.0" text="Прохождение квалификации ППС в течение 5 лет" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="38.0" prefHeight="32.0" prefWidth="818.0" text="Наличие педагогической квалификации &quot;Преподаватель высшей школы&quot;" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="label1_1" alignment="CENTER" prefHeight="35.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label2_1" alignment="CENTER" prefHeight="34.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label3_1" alignment="CENTER" prefHeight="35.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label4_1" alignment="CENTER" prefHeight="35.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label5_1" alignment="CENTER" prefHeight="34.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label7_1" alignment="CENTER" prefHeight="31.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label8_1" alignment="CENTER" prefHeight="38.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label9_1" alignment="CENTER" prefHeight="37.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label fx:id="label10_1" alignment="CENTER" prefHeight="38.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font></Label>
+                              <Label layoutX="10.0" layoutY="315.0" prefHeight="32.0" prefWidth="799.0" text="Наличие почётных научно-педагогических званий" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="label6_1" alignment="CENTER" layoutX="1024.0" layoutY="238.0" prefHeight="34.0" prefWidth="120.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Реалзация научно-педагогического потенциала">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="95.0" prefHeight="534.0" prefWidth="1042.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="95.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="867.0" minWidth="10.0" prefWidth="858.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.0" minWidth="10.0" prefWidth="98.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="610.0" text="Количество защит докторантов за 10 лет" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Выполненная учебная нагрузка (часы)" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Участие в НИОКР в качестве исполнителя (усл. п.л.)" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Научное руководство НИОКР (усл. п.л.)" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="32.0" prefWidth="817.0" text="Разработка и внедрение новых образовательных технологий (количество)" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="32.0" prefWidth="704.0" text="Качество УМК преподаваемой учебной дисциплины (коэффициент)" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="32.0" prefWidth="668.0" text="Участие (за 5 лет) в разработке УМ пособий (пособий) (усл. п. л.)" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="244.0" prefHeight="27.0" prefWidth="610.0" text="Количество защит адьюнтов (аспирантов) за 5 лет" GridPane.rowIndex="9">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="372.0" prefHeight="27.0" prefWidth="610.0" text="Качество проведения учебных занятий (средний балл)" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="404.0" prefHeight="27.0" prefWidth="610.0" text="Участие (за 10 лет) в разработке учебников (усл. п. л.)" GridPane.rowIndex="10">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Участие (за 10 лет) в разработке монографий (усл. п. л.)" GridPane.rowIndex="12">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Участие (за 7 лет) в разработке учебных пособий (усл. п. л.)" GridPane.rowIndex="11">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="564.0" prefHeight="32.0" prefWidth="764.0" text="Руководство военно-научной работой обучающихся" GridPane.rowIndex="14">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="label1" alignment="CENTER" prefHeight="32.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label2" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label3" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label4" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label5" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label6" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label7" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label8" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label9" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label10" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label11" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label12" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label fx:id="label13" alignment="CENTER" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
+                              <Label layoutX="10.0" layoutY="492.0" prefHeight="27.0" prefWidth="610.0" text="Участие в изобретательской и рационализаторской работе" GridPane.rowIndex="13">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="label14" alignment="CENTER" layoutX="954.0" layoutY="479.0" prefHeight="25.0" prefWidth="176.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Label layoutX="14.0" layoutY="17.0" prefHeight="35.0" prefWidth="47.0" text="Год:">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="yearLabel2" layoutX="62.0" layoutY="17.0" prefHeight="35.0" prefWidth="75.0" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label layoutX="154.0" layoutY="17.0" prefHeight="35.0" prefWidth="131.0" text="Должность:">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label fx:id="categoryLabel2" layoutX="286.0" layoutY="17.0" prefHeight="35.0" prefWidth="131.0" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label layoutX="435.0" layoutY="17.0" prefHeight="35.0" prefWidth="72.0" text="ФИО:">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label fx:id="nameLabel2" layoutX="506.0" layoutY="17.0" prefHeight="35.0" prefWidth="409.0" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Button cancelButton="true" layoutX="971.0" layoutY="6.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="85.0" text="Back" AnchorPane.rightAnchor="49.0" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
