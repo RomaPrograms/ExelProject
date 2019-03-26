@@ -3,12 +3,14 @@ package dbconnection.information_from_db;
 import java.sql.Connection;
 import dbconnection.DbConnection;
 import entity.Chair;
+import entity.Faculty;
 import entity.FacultyConstants;
 import entity.Person;
 import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 
 public abstract class AbstractDAO {
     protected Connection connection;
@@ -22,9 +24,11 @@ public abstract class AbstractDAO {
     public abstract ObservableList<String> findPathsToFilesByYear(String year);
     public abstract void addDataToDatabase(int year, String name,
                                            String pathToFile);
-    public abstract void addConstantToDatabase(int constStudy,
-                                               int constMethodical,
-                                               int constScience, int matBase);
+    public abstract void addConstantToDatabase(double constStudy, double constMethodical,
+                                               double constIdeology, int constScience,
+                                               int matBase, double constVSandOBVS,
+                                               double CMP);
+    public abstract ObservableList<Faculty> getInformationAboutFaculties();
     public abstract FacultyConstants getFacultyConstants();
     public abstract int getMaxYearOfTables();
     public abstract int getMinYearOfTables();

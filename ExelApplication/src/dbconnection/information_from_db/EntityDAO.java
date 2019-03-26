@@ -1,6 +1,7 @@
 package dbconnection.information_from_db;
 
 import entity.Chair;
+import entity.Faculty;
 import entity.FacultyConstants;
 import entity.Person;
 import javafx.collections.FXCollections;
@@ -16,7 +17,7 @@ public class EntityDAO extends AbstractDAO {
     private static final String FIND_CHAIRS_IN_DATABASE_BY_YEAR
             = "SELECT ch.chairName, ch.chairUnivName, ch.chairNpp,"
             + " ch.chairSchool, ch.chairMethodic, ch.chairScience, ch.mathtechBase,"
-            + " ch.chairIdeolog, ch.chairSecurity, ch.chairRate FROM"
+            + " ch.chairIdeolog, ch.chairSecurity, ch.chairRate, ch.chairQual FROM"
             + " chairs ch inner join addedfiles a ON a.id = ch.addedFilesId"
             + " where a.yearOfTable = (?)";
 
@@ -25,7 +26,7 @@ public class EntityDAO extends AbstractDAO {
             + " AND chairName = (?)";
 
     private static final String FIND_PERSONS_IN_DATABASE_BY_YEAR
-            = "SELECT p.pchair, p.prank, p.pname, p.pcategory, p.prate FROM"
+            = "SELECT p.pchair, p.prank, p.pname, p.pcategory, p.prate, p.prateQual FROM"
             + " persons p inner join addedfiles a ON a.id = p.addedFiles where"
             + " a.yearOfTable = (?)";
 
@@ -35,15 +36,16 @@ public class EntityDAO extends AbstractDAO {
 
     private static final String ADD_TO_DATABASE_TO_PERSONS
             = "INSERT INTO persons (pchair, pyear, prank, pname,"
-            + " pcategory, prate, addedFiles) values (?, ?, ?, ?, ?, ?,"
+            + " pcategory, prate, prateQual, addedFiles) values (?, ?, ?, ?, ?, ?, ?,"
             + "(SELECT (id) from addedfiles where yearOfTable = (?)"
             + " and chairName = (?)))";
 
     private static final String ADD_TO_DATABASE_TO_CHAIRS
             = "INSERT INTO chairs (chairUnivName, chairYear, chairName,"
             + " chairNpp, chairSchool, chairMethodic, chairScience,"
-            + " mathtechBase, chairIdeolog, chairSecurity, chairRate,"
-            + " addedFilesID) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT "
+            + " mathtechBase, chairIdeolog, chairSecurity, chairRate, chairQual,"
+            + " addedFilesID) values (?,"
+            + " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT "
             + "(id) from addedfiles where"
             + " yearOfTable = (?) and chairName = (?)))";
 
@@ -54,18 +56,23 @@ public class EntityDAO extends AbstractDAO {
             = "TRUNCATE TABLE constants";
 
     private static final String ADD_DATA_TO_CONSTANTS
-            = "INSERT INTO constants (constStudy, constMethodical,"
-            + " constScience, constMatBase) VALUES (?, ?, ?, ?)";
+            = "INSERT INTO constants (constStudy, constMethodical, constIdeology,"
+            + " constScience, constMatBase, constVSandOBVS, constCMP) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_CONSTANTS
-            = "SELECT constStudy, constMethodical,"
-            + " constScience, constMatBase FROM constants";
+            = "SELECT * FROM constants";
 
     private static final String MAX_YEAR_OF_TABLE
             = "SELECT MAX(yearOfTable) FROM addedfiles";
 
     private static final String MIN_YEAR_OF_TABLE
             = "select MIN(yearOfTable) FROM addedfiles;";
+
+    private static final String FIND_INFORMATION_ABOUT_FACULTIES
+            = "select chairUnivName, chairYear, avg(chairSchool), avg(chairMethodic),"
+            + " avg(chairScience), avg(mathtechBase) from chairs group by"
+            + " chairUnivName,chairYear";
 
     public EntityDAO() {
         super();
@@ -91,7 +98,8 @@ public class EntityDAO extends AbstractDAO {
                         resultSet.getDouble(7),
                         resultSet.getDouble(8),
                         resultSet.getDouble(9),
-                        resultSet.getDouble(10)));
+                        resultSet.getDouble(10),
+                        resultSet.getDouble(11)));
             }
 
             closeResultSet(resultSet);
@@ -121,7 +129,8 @@ public class EntityDAO extends AbstractDAO {
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        resultSet.getInt(5)));
+                        resultSet.getInt(5),
+                        resultSet.getInt(6)));
             }
             closeResultSet(resultSet);
             return list;
@@ -193,7 +202,6 @@ public class EntityDAO extends AbstractDAO {
             addDataToAddedFilesDatabase(year, name, pathToFile);
             addDataToPersonsDatabase(year, name, tableFileReader);
             addDataToChairDatabase(year, name, tableFileReader);
-            addDataToFacultyDatabase();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -220,8 +228,10 @@ public class EntityDAO extends AbstractDAO {
                     tableFileReader.GetCategoryFromFile(i + 4));
             preparedStatement.setDouble(6,
                     tableFileReader.GetRatingFromFile(i + 4));
-            preparedStatement.setInt(7, year);
-            preparedStatement.setString(8, name);
+            preparedStatement.setDouble(7,
+                    tableFileReader.GetQualRateFromFile(i + 4));
+            preparedStatement.setInt(8, year);
+            preparedStatement.setString(9, name);
 
             preparedStatement.executeUpdate();
         }
@@ -256,8 +266,12 @@ public class EntityDAO extends AbstractDAO {
                 tableFileReader.GetChSecurity());
         preparedStatement.setDouble(11,
                 tableFileReader.GetChRate());
-        preparedStatement.setInt(12, year);
-        preparedStatement.setString(13, name);
+//        preparedStatement.setDouble(12,
+//                        34.67);
+        preparedStatement.setDouble(12,
+                tableFileReader.GetChQualRate());
+        preparedStatement.setInt(13, year);
+        preparedStatement.setString(14, name);
         preparedStatement.executeUpdate();
         closePreparedStatement(preparedStatement);
     }
@@ -275,23 +289,22 @@ public class EntityDAO extends AbstractDAO {
         closePreparedStatement(preparedStatement);
     }
 
-    private void addDataToFacultyDatabase() throws SQLException {
-        PreparedStatement preparedStatement = null;
-
-        closePreparedStatement(preparedStatement);
-    }
-
-    public void addConstantToDatabase(int constStudy, int constMethodical,
-                                      int constScience, int matBase) {
+    public void addConstantToDatabase(double constStudy, double constMethodical,
+                                      double constIdeology, int constScience,
+                                      int matBase, double constVSandOBVS,
+                                      double CMP) {
         PreparedStatement preparedStatement = null;
         try {
             deleteDataFromConstants();
             preparedStatement
                     = connection.prepareStatement(ADD_DATA_TO_CONSTANTS);
-            preparedStatement.setInt(1, constStudy);
-            preparedStatement.setInt(2, constMethodical);
-            preparedStatement.setInt(3, constScience);
-            preparedStatement.setInt(4, matBase);
+            preparedStatement.setDouble(1, constStudy);
+            preparedStatement.setDouble(2, constMethodical);
+            preparedStatement.setDouble(3, constIdeology);
+            preparedStatement.setDouble(4, constScience);
+            preparedStatement.setDouble(5, matBase);
+            preparedStatement.setDouble(6, constVSandOBVS);
+            preparedStatement.setDouble(7, CMP);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -308,10 +321,13 @@ public class EntityDAO extends AbstractDAO {
                     = connection.prepareStatement(SELECT_CONSTANTS);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
-                return new FacultyConstants(resultSet.getInt(1),
-                        resultSet.getInt(2),
+                return new FacultyConstants(resultSet.getInt(2),
                         resultSet.getInt(3),
-                        resultSet.getInt(4));
+                        resultSet.getInt(4),
+                        resultSet.getInt(5),
+                        resultSet.getInt(6),
+                        resultSet.getInt(7),
+                        resultSet.getInt(8));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -327,6 +343,60 @@ public class EntityDAO extends AbstractDAO {
                 connection.prepareStatement(DELETE_DATA_FROM_CONSTANTS);
         preparedStatement.executeUpdate();
         closePreparedStatement(preparedStatement);
+    }
+
+    @Override
+    public ObservableList<Faculty> getInformationAboutFaculties() {
+        ObservableList<Faculty> faculties = FXCollections.observableArrayList();
+
+            PreparedStatement statement = null;
+            FacultyConstants facultyConstants = getFacultyConstants();
+            try {
+                statement = connection.prepareStatement(
+                        FIND_INFORMATION_ABOUT_FACULTIES);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Faculty faculty = new Faculty();
+
+                    faculty.setfName(resultSet.getString(1));
+                    faculty.setfYear(resultSet.getInt(2));
+                    faculty.setfSchoolWork(Double
+                            .parseDouble(resultSet.getString(3)));
+                    faculty.setfMethodicalWork(Double
+                            .parseDouble(resultSet.getString(4)));
+                    faculty.setfSinceWork(Double
+                            .parseDouble(resultSet.getString(5)));
+                    faculty.setfMatBase(Double
+                            .parseDouble(resultSet.getString(6)));
+                    if (facultyConstants != null) {
+                       faculty.setfConstantMatBase(facultyConstants
+                               .getfConstantMatBase());
+                       faculty.setfConstantMethodicalWork(facultyConstants
+                               .getfConstantMethodicalWork());
+                       faculty.setfConstantSinceWork(facultyConstants
+                               .getfConstantSinceWork());
+                       faculty.setfConstantIdWork(facultyConstants
+                               .getfConstantIdWork());
+                       faculty.setfConstantSchoolWork(facultyConstants
+                               .getfConstantSchoolWork());
+                       faculty.setfConstantSMR(facultyConstants
+                               .getfConstantSMR());
+                       faculty.setfConstantVSandVPVO(facultyConstants
+                               .getfConstantVSandVPVO());
+                    }
+                    faculties.add(faculty);
+                }
+                closeResultSet(resultSet);
+                return faculties;
+            } catch (NullPointerException ex) { //calls when resultSet is empty.
+                ex.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                closePreparedStatement(statement);
+            }
+
+        return faculties;
     }
 
     @Override

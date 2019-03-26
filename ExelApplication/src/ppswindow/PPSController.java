@@ -39,6 +39,8 @@ public class PPSController implements Initializable {
     @FXML
     private TableColumn<Person, String> categoryColumn;
     @FXML
+    private TableColumn<Person, String> rateQualColumn;
+    @FXML
     private TableView<Person> tableView;
     @FXML
     private ComboBox categoryComboBox;
@@ -57,7 +59,8 @@ public class PPSController implements Initializable {
 
     ObservableList<String> categoryCheckBoxList =
             FXCollections.observableArrayList("любая", "профессор",
-                    "доцент", "преподаватель", "ст. преподаватель");
+                    "доцент", "преподаватель", "ст. преподаватель",
+                    "нач. цикла", "нач. кафедры");
 
     public static ObservableList<String> yearCheckBoxList
             = FXCollections.observableArrayList("2019", "2018", "2017",
@@ -131,6 +134,9 @@ public class PPSController implements Initializable {
                 new PropertyValueFactory<>("pRate"));
         this.rankColumn.setCellValueFactory(
                 new PropertyValueFactory<>("pRank"));
+        this.rateQualColumn.setCellValueFactory(
+                new PropertyValueFactory<>("pRateQual")
+        );
 
         this.yearComboBoxChanged();
         if (!staticSearchFild.isEmpty()) {
@@ -155,6 +161,7 @@ public class PPSController implements Initializable {
         } else {
            this.categoryComboBoxChanged();
         }
+
     }
 
     @FXML
@@ -184,15 +191,24 @@ public class PPSController implements Initializable {
         staticCategory = category;
     }
 
+    int t = 0;
     @FXML
     public void yearComboBoxChanged() {
-        ObservableList<Person> items = tableView.getItems(); //здесь возникает InvocationTargetException - оно возникало когда я не создавал
-        items.clear();                                       //объект, типо FXMLLoader fxmlLoader = new FXMLLoader();, я писал просто
+        filter.clear();
+//        ObservableList<Person> items = tableView.getItems();
+//        if (t == 1) {
+//            System.out.println(3);
+//        }
+//        t++;
+//
+//        if (items.size() != 0) {
+//            items.clear();
+//        }
         String year = yearComboBox.getValue().toString();    //FXMLLoader fxmlLoader;
         staticYear = year;
         persons = entityDAO.findPersonsByYear(year);
-
         filter = new FilteredList(persons, e -> true);
+        //search();
         tableView.setItems(persons);
     }
 

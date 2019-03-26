@@ -117,6 +117,14 @@ public class TableFileReader {
         }
     }
 
+    public double GetQualRateFromFile(int rowNumber) {
+        try {
+            return Math.round(sheet.getRow(rowNumber).getCell(152).getNumericCellValue() * 100.00) / 100.00;
+        }catch (Exception e) {
+            return (Double)null;
+        }
+    }
+
     public String GetCategoryFromFile(int rowNumber) {
         try {
             if ((int)sheet.getRow(rowNumber).getCell(8)
@@ -595,6 +603,16 @@ public class TableFileReader {
             return -1;
         }
     }
+
+    public double GetChQualRate() {
+        try {
+            return Math.round(sheet.getRow(30).getCell(152).getNumericCellValue() * 100.00) / 100.00;
+        }catch (Exception e) {
+            System.err.println("GetChQualRate error!!!");
+            return -1;
+        }
+    }
+
     //Additional info for chair
     public double GetNPPS() {
         try {

@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="600.0" minWidth="1144.0" prefHeight="600.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chairwindow.ChairController">
+<AnchorPane minHeight="600.0" minWidth="1144.0" prefHeight="600.0" prefWidth="1274.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chairwindow.ChairController">
    <children>
-      <TableView fx:id="tableView" layoutX="25.0" layoutY="101.0" prefHeight="488.0" prefWidth="897.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="101.0">
+      <TableView fx:id="tableView" layoutX="25.0" layoutY="101.0" prefHeight="488.0" prefWidth="1227.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="101.0">
         <columns>
           <TableColumn fx:id="firstColumn" prefWidth="81.99998474121094" text="ВУЗ" />
           <TableColumn fx:id="secondColumn" minWidth="0.0" prefWidth="106.0" text="Кафедра" />
@@ -22,6 +22,7 @@
             <TableColumn fx:id="eighthColumn" minWidth="0.0" prefWidth="135.0" text="Идеологическая&#10;работа&#10;" />
             <TableColumn fx:id="ninthColumn" minWidth="0.0" prefWidth="135.0" text="Безопасность&#10;военной&#10;службы" />
             <TableColumn fx:id="tenthColumn" minWidth="0.0" prefWidth="123.0" text="Рейтинг&#10;кафедр" />
+            <TableColumn fx:id="eleventhColumn" minWidth="0.0" prefWidth="123.0" text="Рейтинг&#10;квалификации&#10;кафедр&#10;" />
         </columns>
       </TableView>
       <Button fx:id="backButton" cancelButton="true" layoutX="840.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="85.0" text="Назад" AnchorPane.rightAnchor="25.0" />

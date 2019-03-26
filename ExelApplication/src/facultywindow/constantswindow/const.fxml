@@ -4,12 +4,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="357.0" prefWidth="333.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facultywindow.constantswindow.ConstantController">
+<AnchorPane prefHeight="494.0" prefWidth="333.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facultywindow.constantswindow.ConstantController">
    <children>
-      <TextField fx:id="studyWorkTextField" layoutX="31.0" layoutY="33.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите учебную работу" />
-      <TextField fx:id="methodicalWorkTextField" layoutX="31.0" layoutY="102.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите методическу работу" />
-      <TextField fx:id="scienceWorkTextField" layoutX="31.0" layoutY="170.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите научную работу" />
-      <TextField fx:id="matBaseTextField" layoutX="31.0" layoutY="236.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите МТБ" />
-      <Button fx:id="saveButton" layoutX="31.0" layoutY="299.0" mnemonicParsing="false" onAction="#saveInformation" prefHeight="48.0" prefWidth="274.0" text="Сохранить" />
+      <TextField fx:id="studyWorkTextField" layoutX="31.0" layoutY="15.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите учебную работу" />
+      <TextField fx:id="methodicalWorkTextField" layoutX="31.0" layoutY="75.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите методическу работу" />
+      <TextField fx:id="ideologWorkTextField" layoutX="31.0" layoutY="135.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите идеологическуюую работу" />
+      <TextField fx:id="scienceWorkTextField" layoutX="31.0" layoutY="195.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите научную работу" />
+      <Button fx:id="saveButton" layoutX="30.0" layoutY="435.0" mnemonicParsing="false" onAction="#saveInformation" prefHeight="48.0" prefWidth="274.0" text="Сохранить" />
+      <TextField fx:id="matBaseTextField" layoutX="31.0" layoutY="255.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите МТБ" />
+      <TextField fx:id="vsAndOBVSTextField" layoutX="30.0" layoutY="315.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите ВС и ОБВС" />
+      <TextField fx:id="cmpTextField" layoutX="30.0" layoutY="375.0" prefHeight="48.0" prefWidth="274.0" promptText="Введите СМР" />
    </children>
 </AnchorPane>

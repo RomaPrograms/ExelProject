@@ -2,7 +2,6 @@ package chairwindow;
 
 import dbconnection.information_from_db.EntityDAO;
 import entity.Chair;
-import entity.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +42,8 @@ public class ChairController implements Initializable {
     public TableColumn ninthColumn;
     @FXML
     public TableColumn tenthColumn;
+    @FXML
+    public TableColumn eleventhColumn;
     @FXML
     public Button backButton;
     @FXML
@@ -170,6 +171,8 @@ public class ChairController implements Initializable {
                 new PropertyValueFactory<Chair, String>("chSecurity"));
         this.tenthColumn.setCellValueFactory(
                 new PropertyValueFactory<Chair, String>("chRate"));
+        this.eleventhColumn.setCellValueFactory(
+                new PropertyValueFactory<Chair, String>("chRateQual"));
 
         this.yearComboBoxChanged();
     }

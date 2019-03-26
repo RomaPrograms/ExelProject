@@ -14,11 +14,12 @@ public class Chair {
     private SimpleDoubleProperty chIdWork;
     private SimpleDoubleProperty chSecurity;
     private SimpleDoubleProperty chRate;
+    private SimpleDoubleProperty chRateQual;
 
     public Chair(String chUnivName, String chName, double chNpp,
                  double chStudyWork, double chMethodicalWork,
                  double chSinceWork, double chMatBase, double chIdWork,
-                 double chSecurity, double chRate) {
+                 double chSecurity, double chRate, double chRateQual) {
         this.chUnivName = new SimpleStringProperty(chUnivName);
         this.chName = new SimpleStringProperty(chName);
         this.chNpp = new SimpleDoubleProperty(chNpp);
@@ -29,6 +30,19 @@ public class Chair {
         this.chIdWork = new SimpleDoubleProperty(chIdWork);
         this.chSecurity = new SimpleDoubleProperty(chSecurity);
         this.chRate = new SimpleDoubleProperty(chRate);
+        this.chRateQual = new SimpleDoubleProperty(chRateQual);
+    }
+
+    public double getChRateQual() {
+        return chRateQual.get();
+    }
+
+    public SimpleDoubleProperty chRateQualProperty() {
+        return chRateQual;
+    }
+
+    public void setChRateQual(double chRateQual) {
+        this.chRateQual.set(chRateQual);
     }
 
     public double getChIdWork() {

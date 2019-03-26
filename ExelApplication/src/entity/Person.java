@@ -12,15 +12,17 @@ public class Person {
     private SimpleStringProperty pName;
     private SimpleStringProperty pCategory;
     private SimpleDoubleProperty pRate;
+    private SimpleDoubleProperty pRateQual;
 
     public Person(String pChair, String pRank, String pName,
-                  String pCategory, double pRate) {
+                  String pCategory, double pRate, double pRateQual) {
         //this.pId = new SimpleIntegerProperty(pId);
         this.pChair = new SimpleStringProperty(pChair);
         this.pRank = new SimpleStringProperty(pRank);
         this.pName = new SimpleStringProperty(pName);
         this.pCategory = new SimpleStringProperty(pCategory);
         this.pRate = new SimpleDoubleProperty(pRate);
+        this.pRateQual = new SimpleDoubleProperty(pRateQual);
     }
 
     public Person(int number, TableFileReader tfReader, int id) {
@@ -34,6 +36,20 @@ public class Person {
                 tfReader.GetCategoryFromFile(id + 4));
         this.pRate = new SimpleDoubleProperty(
                 tfReader.GetRatingFromFile(id + 4));
+        this.pRateQual = new SimpleDoubleProperty(
+                tfReader.GetQualRateFromFile(id + 4));
+    }
+
+    public double getpRateQual() {
+        return pRateQual.get();
+    }
+
+    public SimpleDoubleProperty pRateQualProperty() {
+        return pRateQual;
+    }
+
+    public void setpRateQual(double pRateQual) {
+        this.pRateQual.set(pRateQual);
     }
 
     public int getpId() {

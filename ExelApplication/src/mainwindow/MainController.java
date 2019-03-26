@@ -113,12 +113,12 @@ public class MainController implements Initializable {
     }
 
     public void openWindowDataAboutPPS() {
-        openNewWindow("/ppswindow/pps.fxml", 933, 523,
+        openNewWindow("/ppswindow/pps.fxml", 953, 523,
                 true);
     }
 
     public void openWindowDataAboutChair() {
-        openNewWindow("/chairwindow/chair.fxml", 1144, 600,
+        openNewWindow("/chairwindow/chair.fxml", 1274, 600,
                 true);
     }
     

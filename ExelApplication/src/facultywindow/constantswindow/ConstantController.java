@@ -16,7 +16,14 @@ public class ConstantController {
     @FXML
     public TextField matBaseTextField;
     @FXML
+    public TextField ideologWorkTextField;
+    @FXML
+    public TextField vsAndOBVSTextField;
+    @FXML
+    public TextField cmpTextField;
+    @FXML
     public Button saveButton;
+
     private EntityDAO entityDAO = new EntityDAO();
 
     public FacultyConstants saveInformation() {
@@ -26,10 +33,14 @@ public class ConstantController {
                 = Integer.parseInt(methodicalWorkTextField.getText());
         int scienceConstant = Integer.parseInt(scienceWorkTextField.getText());
         int matBaseConstant = Integer.parseInt(matBaseTextField.getText());
+        int ideologyConstant = Integer.parseInt(ideologWorkTextField.getText());
+        int vs = Integer.parseInt(vsAndOBVSTextField.getText());
+        int cmp = Integer.parseInt(cmpTextField.getText());
+
         entityDAO.addConstantToDatabase(studyConstant, methodicalConstant,
-                scienceConstant, matBaseConstant);
+                ideologyConstant, scienceConstant, matBaseConstant, vs, cmp);
 
         return new FacultyConstants(studyConstant, methodicalConstant,
-                scienceConstant, matBaseConstant);
+                ideologyConstant, scienceConstant, matBaseConstant, vs, cmp);
     }
 }
