@@ -27,10 +27,10 @@
                <font>
                   <Font name="Lucida Bright" size="47.0" />
                </font></Label>
-            <Button fx:id="idDataAboutPPS" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#openWindowDataAboutPPS" prefHeight="81.0" prefWidth="132.0" text="Данные по ППС" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="454.0" AnchorPane.topAnchor="275.0" />
-            <Button fx:id="idDataAboutChair" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="275.0" mnemonicParsing="false" onAction="#openWindowDataAboutChair" prefHeight="81.0" prefWidth="132.0" text="Данные по&#10;кафедрам&#10;" wrapText="true" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="308.0" AnchorPane.topAnchor="275.0" />
-            <Button fx:id="idExit" layoutX="454.0" layoutY="275.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="81.0" prefWidth="132.0" text="Выход" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="454.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="275.0" />
-            <Button fx:id="idDataAboutFaculty" layoutX="307.0" layoutY="275.0" mnemonicParsing="false" onAction="#openWindowDataAboutFaculty" prefHeight="81.0" prefWidth="132.0" text="Данные по&#10;факультетам" />
+            <Button fx:id="idDataAboutPPS" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#openWindowDataAboutPPS" prefHeight="81.0" prefWidth="132.0" text="Данные по ППС" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="454.0" />
+            <Button fx:id="idDataAboutChair" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="275.0" mnemonicParsing="false" onAction="#openWindowDataAboutChair" prefHeight="81.0" prefWidth="132.0" text="Данные по&#10;кафедрам&#10;" wrapText="true" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="308.0" />
+            <Button fx:id="idExit" layoutX="454.0" layoutY="275.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="81.0" prefWidth="132.0" text="Выход" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="454.0" AnchorPane.rightAnchor="14.0" />
+            <Button fx:id="idDataAboutFaculty" layoutX="307.0" layoutY="275.0" mnemonicParsing="false" onAction="#openWindowDataAboutFaculty" prefHeight="81.0" prefWidth="132.0" text="Данные по&#10;факультетам" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="308.0" AnchorPane.rightAnchor="160.0" />
          </children>
       </AnchorPane>
    </children>

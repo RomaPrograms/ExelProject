@@ -15,7 +15,7 @@ public interface Controller {
     void setLabels(Chair chair, double[] mass, String year);
 
     default void setLabels(Label[] massLabel, Label nameLabel, Label yearLabel,
-                           Chair chair, String year, double mass[]) {
+                           Chair chair, String year, double[] mass) {
         nameLabel.setText(chair.getChName());
         yearLabel.setText(year);
 

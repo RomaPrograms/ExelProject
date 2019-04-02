@@ -86,8 +86,14 @@ public class PPSController implements Initializable {
         }
     }
 
+    static int i = 0;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (i == 1) {
+            System.out.println("");
+        }
+        i++;
         this.categoryComboBox.setItems(categoryCheckBoxList);
         this.yearComboBox.setItems(yearCheckBoxList);
         this.categoryComboBox.setValue(staticCategory);
@@ -138,7 +144,7 @@ public class PPSController implements Initializable {
                 new PropertyValueFactory<>("pRateQual")
         );
 
-        this.yearComboBoxChanged();
+        this.yearComboBoxChangedByMe();
         if (!staticSearchFild.isEmpty()) {
             filter.setPredicate((Predicate<? super Person>) (Person person) ->{
                 if (person.getpCategory().equals(staticCategory)) {
@@ -161,7 +167,29 @@ public class PPSController implements Initializable {
         } else {
            this.categoryComboBoxChanged();
         }
+    }
 
+    @FXML
+    public void yearComboBoxChanged() {
+        staticYear = yearComboBox.getValue().toString();
+        persons.clear();
+        persons = entityDAO.findPersonsByYear(staticYear);
+        filter = new FilteredList(persons, e -> true);
+        staticCategory = "любая";
+        this.categoryComboBox.setValue(staticCategory);
+        staticSearchFild = "";
+        this.searchField.setText(staticSearchFild);
+        tableView.setItems(persons);
+    }
+
+    public void yearComboBoxChangedByMe(){
+        staticYear = yearComboBox.getValue().toString();
+        persons.clear();
+        persons = entityDAO.findPersonsByYear(staticYear);
+        filter = new FilteredList(persons, e -> true);
+        this.categoryComboBox.setValue(staticCategory);
+        this.searchField.setText(staticSearchFild);
+        tableView.setItems(persons);
     }
 
     @FXML
@@ -189,27 +217,6 @@ public class PPSController implements Initializable {
         }
 
         staticCategory = category;
-    }
-
-    int t = 0;
-    @FXML
-    public void yearComboBoxChanged() {
-        filter.clear();
-//        ObservableList<Person> items = tableView.getItems();
-//        if (t == 1) {
-//            System.out.println(3);
-//        }
-//        t++;
-//
-//        if (items.size() != 0) {
-//            items.clear();
-//        }
-        String year = yearComboBox.getValue().toString();    //FXMLLoader fxmlLoader;
-        staticYear = year;
-        persons = entityDAO.findPersonsByYear(year);
-        filter = new FilteredList(persons, e -> true);
-        //search();
-        tableView.setItems(persons);
     }
 
     @FXML

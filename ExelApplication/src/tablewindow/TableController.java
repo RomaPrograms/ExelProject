@@ -77,6 +77,7 @@ public class TableController implements Initializable {
         Connection connection = (Connection) DbConnection.getConnection();
 
         try {
+
             PreparedStatement preparedStatement1 =
                     connection.prepareStatement(sqlQueryForDeletingLineAddedFiles);
             PreparedStatement preparedStatement2 =

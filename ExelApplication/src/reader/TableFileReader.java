@@ -77,7 +77,7 @@ public class TableFileReader {
     public ArrayList<String> GetPersonNameList(){
         ArrayList<String> namesList = new ArrayList<>();
         try {
-            for (int i = 5;i < 31;i++) {
+            for (int i = 5; i < 31; i++) {
                 namesList.add(sheet.getRow(i).getCell(5)
                         .getStringCellValue());
             }
@@ -607,7 +607,7 @@ public class TableFileReader {
     public double GetChQualRate() {
         try {
             return Math.round(sheet.getRow(30).getCell(152).getNumericCellValue() * 100.00) / 100.00;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("GetChQualRate error!!!");
             return -1;
         }
@@ -617,7 +617,7 @@ public class TableFileReader {
     public double GetNPPS() {
         try {
             return sheet.getRow(4).getCell(157).getNumericCellValue();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("GetAdditionalInfo(the 2nd part) error: 1 parameter!");
             return -1;
         }

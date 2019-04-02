@@ -2,7 +2,6 @@ package facultywindow;
 
 import dbconnection.information_from_db.EntityDAO;
 import entity.Faculty;
-import entity.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -23,7 +22,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.function.Predicate;
 
 public class FacultyController implements Initializable {
@@ -62,7 +60,7 @@ public class FacultyController implements Initializable {
     @FXML
     public ComboBox yearComboBox;
 
-    private ObservableList<Faculty> faculties
+    public static ObservableList<Faculty> faculties
             = FXCollections.observableArrayList();
 
     private ObservableList<String> yearCheckBoxList
@@ -70,10 +68,30 @@ public class FacultyController implements Initializable {
             "2016", "2015");
 
     private static FXMLLoader fxmlLoader = new FXMLLoader();
-    private static Parent loader = null;
     private static EntityDAO entityDAO = new EntityDAO();
     private static String staticYear = "выбрать год";
-    private FilteredList<Faculty> filter;
+    private static FilteredList<Faculty> filter;
+
+//    private static FacultyController facultyController = null;
+//
+//    private FacultyController() { }
+//
+//    public static FacultyController getFacultyController() {
+//        if (facultyController == null){
+//            facultyController = new FacultyController();
+//        }
+//        return facultyController;
+//    }
+///////////////////////////////////////////////////////////////////////////////
+//    public FacultyController(){
+//        if (facultyController == null) {
+//            facultyController = new FacultyController();
+//        }
+//    }
+//
+//    public static FacultyController getFacultyController() {
+//        return facultyController;
+//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { //когда будем получать инфу с базы данных, мы вставим в каждый
@@ -109,6 +127,7 @@ public class FacultyController implements Initializable {
         this.thirteenthColumn.setCellValueFactory(
                 new PropertyValueFactory<Faculty, Double>("fRate"));
 
+        yearComboBoxChanged();
     }
 
     @FXML
@@ -125,10 +144,11 @@ public class FacultyController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        refresh();
     }
 
     @FXML
-    public void yearComboBoxChanged(ActionEvent event) {
+    public void yearComboBoxChanged() {
         staticYear = String.valueOf(yearComboBox.getValue());
         filter = new FilteredList(faculties, e -> true);
 
@@ -141,8 +161,11 @@ public class FacultyController implements Initializable {
         tableView.setItems(sort);
     }
 
+
+
     @FXML
     public void exit() {
+        Parent loader = null;
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.hide();
 
@@ -157,5 +180,9 @@ public class FacultyController implements Initializable {
         newStage.setTitle("Проект.");
         newStage.setScene(new Scene(loader));
         newStage.show();
+    }
+
+    public void refresh() {
+        yearComboBoxChanged();
     }
 }

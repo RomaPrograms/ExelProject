@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Set;
+import java.util.List;
 
 public abstract class AbstractDAO {
     protected Connection connection;
@@ -33,6 +33,7 @@ public abstract class AbstractDAO {
     public abstract int getMaxYearOfTables();
     public abstract int getMinYearOfTables();
     public abstract boolean isExistInDatabase(String year, String chair);
+    public abstract void deleteDataFromDatabase(List<String> list);
     public void closePreparedStatement(PreparedStatement st) {
         try {
             if (st != null) {

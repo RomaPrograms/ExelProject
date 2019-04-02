@@ -3,6 +3,7 @@ package mainwindow;
 import com.mysql.jdbc.Connection;
 import dbconnection.DbConnection;
 import dbconnection.information_from_db.EntityDAO;
+import exception.FileException;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,12 +12,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import reader.FileManager;
 import tablewindow.TableController;
+
+import java.beans.EventHandler;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +60,9 @@ public class MainController implements Initializable {
     public void addTable() {
         try {
             FileChooser fileChooser = new FileChooser();
+            FileException fileException = new FileException();
+            Button okButton = (Button)fileException.alert.getDialogPane().lookupButton(ButtonType.OK);
+            okButton.setDisable(true);
             fileChooser.setInitialDirectory(new File(
                     "C:\\Users\\user\\Desktop"));
 
@@ -70,6 +76,15 @@ public class MainController implements Initializable {
                     fileChooser.showOpenMultipleDialog(null);
 
             if (files != null) {
+                fileException.alert.setOnCloseRequest(event -> {
+                });
+                fileException.alert.setOnHiding(event->{
+                });
+                fileException.alert.setOnShowing(event->{});
+                fileException.alert.setOnShown(event->{});
+
+                fileException.callAlert("Идёт загрузка, пожалуйста подождите" +
+                        " и НЕ НАЖИМАЙТЕ НА КНОПКИ!");
                 for (var file : files) {
                     String addingResult = fileManager.AddFile(file);
 
@@ -101,6 +116,7 @@ public class MainController implements Initializable {
                         }
                     }
                 }
+                fileException.closeAlert();
             }
         } catch (IllegalArgumentException | NullPointerException ex) {
             ex.printStackTrace();
@@ -108,7 +124,7 @@ public class MainController implements Initializable {
     }
 
     public void showAllTables() {
-        openNewWindow("/tablewindow/tables.fxml", 500, 300,
+        openNewWindow("/tablewindow/tables.fxml", 700, 400,
                 false);
     }
 
