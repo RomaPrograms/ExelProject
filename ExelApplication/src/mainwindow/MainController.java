@@ -1,13 +1,13 @@
 package mainwindow;
 
+import chairwindow.ChairController;
 import com.mysql.jdbc.Connection;
 import dbconnection.DbConnection;
 import dbconnection.information_from_db.EntityDAO;
 import exception.FileException;
+import facultywindow.FacultyController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -15,11 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import ppswindow.PPSController;
 import reader.FileManager;
-import tablewindow.TableController;
-
-import java.beans.EventHandler;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,40 +25,31 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    @FXML
-    public MenuItem menuItemDownloaded;
-    @FXML
-    public MenuItem menuItemDownload;
-    @FXML
-    public Button idDataAboutChair;
-    @FXML
     private Button idDataAboutPPS;
-
-    public TableController tableController;
-
-    public FileManager fileManager = new FileManager();
-    public Connection connection;
-    public int minYear;
-    public int maxYear;
+    private FileManager fileManager = new FileManager();
+    private Connection connection;
+    private int minYear;
+    private int maxYear;
     private static EntityDAO entityDAO = new EntityDAO();
-    //public static PPSController ppsController = new PPSController();
-    //public static FacultyController chairController = new FacultyController();
+
+    {
+        minYear = entityDAO.getMinYearOfTables();
+        maxYear = entityDAO.getMaxYearOfTables();
+        PPSController.setYearCheckBoxList(minYear, maxYear);
+        ChairController.setYearCheckBoxList(minYear, maxYear);
+        FacultyController.setYearCheckBoxList(minYear, maxYear);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = (Connection) DbConnection.getConnection();
-        tableController = new TableController();
-
-        //isOldTable();
-        //ppsController.setYearCheckBoxList(minYear, maxYear);
-        //chairController.setYearCheckBoxList(minYear, maxYear);
     }
 
     public void addTable() {
         try {
             FileChooser fileChooser = new FileChooser();
             FileException fileException = new FileException();
-            Button okButton = (Button)fileException.alert.getDialogPane().lookupButton(ButtonType.OK);
+            Button okButton = (Button) fileException.alert.getDialogPane().lookupButton(ButtonType.OK);
             okButton.setDisable(true);
             fileChooser.setInitialDirectory(new File(
                     "C:\\Users\\user\\Desktop"));
@@ -78,10 +66,12 @@ public class MainController implements Initializable {
             if (files != null) {
                 fileException.alert.setOnCloseRequest(event -> {
                 });
-                fileException.alert.setOnHiding(event->{
+                fileException.alert.setOnHiding(event -> {
                 });
-                fileException.alert.setOnShowing(event->{});
-                fileException.alert.setOnShown(event->{});
+                fileException.alert.setOnShowing(event -> {
+                });
+                fileException.alert.setOnShown(event -> {
+                });
 
                 fileException.callAlert("Идёт загрузка, пожалуйста подождите" +
                         " и НЕ НАЖИМАЙТЕ НА КНОПКИ!");
@@ -109,10 +99,13 @@ public class MainController implements Initializable {
                                 ObservableList<String> observableList
                                         = entityDAO
                                         .findPathsToFilesByYear(String.valueOf(year - 5));
-                                tableController.deleteTableFromDatabase(observableList);
-                                //ppsController.setYearCheckBoxList(minYear, maxYear);
-                                //chairController.setYearCheckBoxList(minYear, maxYear);
+                                entityDAO.deleteDataFromDatabase(observableList);
                             }
+                            minYear = entityDAO.getMinYearOfTables();
+                            maxYear = entityDAO.getMaxYearOfTables();
+                            PPSController.setYearCheckBoxList(minYear, maxYear);
+                            ChairController.setYearCheckBoxList(minYear, maxYear);
+                            FacultyController.setYearCheckBoxList(minYear, maxYear);
                         }
                     }
                 }
@@ -137,8 +130,8 @@ public class MainController implements Initializable {
         openNewWindow("/chairwindow/chair.fxml", 1274, 600,
                 true);
     }
-    
-    public void openWindowDataAboutFaculty(){
+
+    public void openWindowDataAboutFaculty() {
         openNewWindow("/facultywindow/faculty.fxml", 960, 600,
                 true);
     }
@@ -148,7 +141,7 @@ public class MainController implements Initializable {
         try {
 
             Stage stage = (Stage) this.idDataAboutPPS.getScene().getWindow();
-            if(closeOldWindow) {
+            if (closeOldWindow) {
                 stage.close();
             }
             Parent loader = new FXMLLoader().load(getClass()
