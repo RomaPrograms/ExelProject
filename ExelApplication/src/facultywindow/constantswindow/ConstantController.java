@@ -1,7 +1,6 @@
 package facultywindow.constantswindow;
 
 import dbconnection.information_from_db.EntityDAO;
-import entity.Faculty;
 import facultywindow.FacultyController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,47 +28,47 @@ public class ConstantController {
 
     public void saveInformation() {
 
-        int studyConstant;
-        int methodicalConstant;
-        int scienceConstant;
-        int matBaseConstant;
-        int ideologyConstant;
-        int vs;
-        int cmp;
+        double studyConstant;
+        double methodicalConstant;
+        double scienceConstant;
+        double matBaseConstant;
+        double ideologyConstant;
+        double vs;
+        double cmp;
 
         if (!studyWorkTextField.getText().isEmpty()) {
-            studyConstant = Integer.parseInt(studyWorkTextField.getText());
+            studyConstant = Double.parseDouble(studyWorkTextField.getText());
         } else {
             studyConstant = -1;
         }
         if (!methodicalWorkTextField.getText().isEmpty()) {
             methodicalConstant
-                    = Integer.parseInt(methodicalWorkTextField.getText());
+                    = Double.parseDouble(methodicalWorkTextField.getText());
         } else {
             methodicalConstant = -1;
         }
         if (!scienceWorkTextField.getText().isEmpty()) {
-            scienceConstant = Integer.parseInt(scienceWorkTextField.getText());
+            scienceConstant = Double.parseDouble(scienceWorkTextField.getText());
         } else {
             scienceConstant = -1;
         }
         if (!matBaseTextField.getText().isEmpty()) {
-            matBaseConstant = Integer.parseInt(matBaseTextField.getText());
+            matBaseConstant = Double.parseDouble(matBaseTextField.getText());
         } else {
             matBaseConstant = -1;
         }
         if (!ideologWorkTextField.getText().isEmpty()) {
-            ideologyConstant = Integer.parseInt(ideologWorkTextField.getText());
+            ideologyConstant = Double.parseDouble(ideologWorkTextField.getText());
         } else {
             ideologyConstant = -1;
         }
         if (!vsAndOBVSTextField.getText().isEmpty()) {
-            vs = Integer.parseInt(vsAndOBVSTextField.getText());
+            vs = Double.parseDouble(vsAndOBVSTextField.getText());
         } else {
             vs = -1;
         }
         if (!cmpTextField.getText().isEmpty()) {
-            cmp = Integer.parseInt(cmpTextField.getText());
+            cmp = Double.parseDouble(cmpTextField.getText());
         } else {
             cmp = -1;
         }

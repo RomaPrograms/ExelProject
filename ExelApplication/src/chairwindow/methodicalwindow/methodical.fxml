@@ -32,7 +32,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="106.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Разработка УМ пособий за 5 лет (усл. п.л.)" GridPane.rowIndex="2">
+            <Label layoutX="10.0" layoutY="106.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Разработка УМ пособий, пособий за 5 лет (усл. п.л.)" GridPane.rowIndex="2">
                <font>
                   <Font size="22.0" />
                </font>

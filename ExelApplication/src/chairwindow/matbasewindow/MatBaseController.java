@@ -10,19 +10,19 @@ import javafx.scene.control.Label;
 
 public class MatBaseController implements Controller {
     @FXML
-    public Label label1;
+    private Label label1;
     @FXML
-    public Label label2;
+    private Label label2;
     @FXML
-    public Label label3;
+    private Label label3;
     @FXML
-    public Label label4;
+    private Label label4;
     @FXML
-    public Label yearLabel;
+    private Label yearLabel;
     @FXML
-    public Label nameLabel;
+    private Label nameLabel;
     @FXML
-    public Button backButton;
+    private Button backButton;
 
     private Parent loader;
     private FXMLLoader fxmlLoader = new FXMLLoader();

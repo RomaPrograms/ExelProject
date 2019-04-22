@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import reader.TableFileReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -23,45 +24,43 @@ import java.util.ResourceBundle;
 
 public class ChairController implements Initializable {
     @FXML
-    public TableColumn firstColumn;
+    private TableColumn firstColumn;
     @FXML
-    public TableColumn secondColumn;
+    private TableColumn secondColumn;
     @FXML
-    public TableColumn thirdColumn;
+    private TableColumn thirdColumn;
     @FXML
-    public TableColumn forthColumn;
+    private TableColumn forthColumn;
     @FXML
-    public TableColumn fifthColumn;
+    private TableColumn fifthColumn;
     @FXML
-    public TableColumn sixthColumn;
+    private TableColumn sixthColumn;
     @FXML
-    public TableColumn seventhColumn;
+    private TableColumn seventhColumn;
     @FXML
-    public TableColumn eighthColumn;
+    private TableColumn eighthColumn;
     @FXML
-    public TableColumn ninthColumn;
+    private TableColumn ninthColumn;
     @FXML
-    public TableColumn tenthColumn;
+    private TableColumn tenthColumn;
     @FXML
-    public TableColumn eleventhColumn;
+    private TableColumn eleventhColumn;
     @FXML
-    public Button backButton;
+    private Button backButton;
     @FXML
-    public ComboBox yearComboBox;
+    private ComboBox yearComboBox;
     @FXML
-    public TableView<Chair> tableView;
+    private TableView<Chair> tableView;
 
-    ObservableList<String> yearCheckBoxList
-            = FXCollections.observableArrayList("2019", "2018", "2017",
-            "2016", "2015");
-
+    private static ObservableList<String> yearCheckBoxList;
     private Parent loader;
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private Controller controller;
     private static String staticYear = "выбрать год";
     private static EntityDAO entityDAO = new EntityDAO();
 
-    public void setYearCheckBoxList(int minYear, int maxYear) {
+    public static void setYearCheckBoxList(int minYear, int maxYear) {
+        yearCheckBoxList = FXCollections.observableArrayList();
         yearCheckBoxList.clear();
 
         for (int i = minYear; i <= maxYear; i++) {
@@ -74,8 +73,8 @@ public class ChairController implements Initializable {
 
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tableView.getSelectionModel().setCellSelectionEnabled(true);
-        this.yearComboBox.setItems(yearCheckBoxList);
-        this.yearComboBox.setValue(staticYear);
+        yearComboBox.setItems(yearCheckBoxList);
+        yearComboBox.setValue(staticYear);
         tableView.setEditable(true);
 
         tableView.setOnMouseClicked(new EventHandler<>() {
@@ -95,7 +94,7 @@ public class ChairController implements Initializable {
                     TableFileReader tableFileReader = new TableFileReader(
                             new File(entityDAO
                                     .findPathToFileByChairAndYear(staticYear,
-                                    chair.getChUnivName())));
+                                            chair.getChUnivName() + "-" + chair.getChName())));
 
                     if (!tableColumn.getText().equals("Номер кафедры")
                             && !tableColumn.getText().equals("Наименование\nкафедры")) {
@@ -124,7 +123,7 @@ public class ChairController implements Initializable {
                                             title = "Материально-техническая база";
                                             mass = tableFileReader.GetAdditionalInfoForChMatBase();
                                         } else {
-                                            return ;
+                                            return;
                                         }
                                     }
                                 }
@@ -180,8 +179,7 @@ public class ChairController implements Initializable {
     @FXML
     public void yearComboBoxChanged() {
         tableView.getItems().clear();
-        String year = yearComboBox.getValue().toString();
-        staticYear = year;
+        staticYear = yearComboBox.getValue().toString();
 
         tableView.setItems(entityDAO.findChairsByYear(staticYear));
     }

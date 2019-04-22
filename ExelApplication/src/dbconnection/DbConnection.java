@@ -8,18 +8,25 @@ public class DbConnection {
     private static final String PASSWORD = "9512684Roma";
     private static final String USER = "root";
     private static final String URL =
-            "jdbc:mysql://localhost:3306/militarydatabase";
-    private final static String DRIVER = "com.mysql.jdbc.Driver";
+            "jdbc:sqlite:D:\\инфа\\Военная Кафедра\\MilitaryProgram\\ExelProject\\ExelApplication\\militarydatabase.sqlite";
+    private final static String DRIVER = "org.sqlite.JDBC";
+    private static final String SQCONN = "jdbc:sqlite:militarydatabase.sqlite";
+    private static Connection INSTANCE;
+
+    private DbConnection() {
+    }
 
     public static Connection getConnection() {
         try {
-            Class.forName(DRIVER);
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            if (INSTANCE == null) {
+                Class.forName(DRIVER);
+                INSTANCE = DriverManager.getConnection(SQCONN);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return INSTANCE;
     }
 }

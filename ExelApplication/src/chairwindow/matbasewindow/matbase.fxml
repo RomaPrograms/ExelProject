@@ -38,7 +38,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="106.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Обеспеченность учебного процесса тренажёрной базы (процент)" GridPane.rowIndex="3">
+            <Label layoutX="10.0" layoutY="106.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Обеспеченность учебного процесса тренажерной базой (процент)" GridPane.rowIndex="3">
                <font>
                   <Font size="22.0" />
                </font>

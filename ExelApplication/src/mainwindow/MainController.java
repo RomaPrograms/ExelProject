@@ -1,13 +1,14 @@
 package mainwindow;
 
 import chairwindow.ChairController;
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import dbconnection.DbConnection;
 import dbconnection.information_from_db.EntityDAO;
 import exception.FileException;
 import facultywindow.FacultyController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    @FXML
     private Button idDataAboutPPS;
     private FileManager fileManager = new FileManager();
     private Connection connection;
@@ -42,7 +44,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        connection = (Connection) DbConnection.getConnection();
+        connection = DbConnection.getConnection();
     }
 
     public void addTable() {
@@ -51,8 +53,6 @@ public class MainController implements Initializable {
             FileException fileException = new FileException();
             Button okButton = (Button) fileException.alert.getDialogPane().lookupButton(ButtonType.OK);
             okButton.setDisable(true);
-            fileChooser.setInitialDirectory(new File(
-                    "C:\\Users\\user\\Desktop"));
 
             FileChooser.ExtensionFilter fileExtensions =
                     new FileChooser.ExtensionFilter(
@@ -112,7 +112,8 @@ public class MainController implements Initializable {
                 fileException.closeAlert();
             }
         } catch (IllegalArgumentException | NullPointerException ex) {
-            ex.printStackTrace();
+            FileException fileException = new FileException();
+            fileException.callAlert(ex.getMessage());
         }
     }
 

@@ -3,6 +3,7 @@ package reader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import entity.Person;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -14,7 +15,8 @@ public class TableFileReader {
     private Workbook workbook;
     private Sheet sheet;
 
-    public TableFileReader() { }
+    public TableFileReader() {
+    }
 
     public TableFileReader(File path) {
         this.path = path;
@@ -29,6 +31,7 @@ public class TableFileReader {
             e.printStackTrace();
         }
     }
+
     ///
     public void GetLineFromTable(int row, int cell) {
         try {
@@ -37,6 +40,7 @@ public class TableFileReader {
             System.err.println(e.getMessage());
         }
     }
+
     ///
     public File getPath() {
         return path;
@@ -70,18 +74,20 @@ public class TableFileReader {
             for (; i < 31; i++) {
                 sheet.getRow(i).getCell(5).getStringCellValue();
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return i - 5;
     }
 
-    public ArrayList<String> GetPersonNameList(){
+    public ArrayList<String> GetPersonNameList() {
         ArrayList<String> namesList = new ArrayList<>();
         try {
             for (int i = 5; i < 31; i++) {
                 namesList.add(sheet.getRow(i).getCell(5)
                         .getStringCellValue());
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         return namesList;
     }
 
@@ -113,57 +119,48 @@ public class TableFileReader {
         } catch (Exception e) {
 //            FileException.callAlert("This table has incorrect information about RATING OF PERSON!");
 //            e.printStackTrace();
-            return (Double)null;
+            return (Double) null;
         }
     }
 
     public double GetQualRateFromFile(int rowNumber) {
         try {
             return Math.round(sheet.getRow(rowNumber).getCell(152).getNumericCellValue() * 100.00) / 100.00;
-        }catch (Exception e) {
-            return (Double)null;
+        } catch (Exception e) {
+            return (Double) null;
         }
     }
 
     public String GetCategoryFromFile(int rowNumber) {
         try {
-            if ((int)sheet.getRow(rowNumber).getCell(8)
+            if ((int) sheet.getRow(rowNumber).getCell(8)
                     .getNumericCellValue() == 1) {
                 return "нач. кафедры";
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(9)
+            } else if ((int) sheet.getRow(rowNumber).getCell(9)
                     .getNumericCellValue() == 1) {
                 return "нач. кафедры";//при отсутствии по штату должности заместителя
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(10)
+            } else if ((int) sheet.getRow(rowNumber).getCell(10)
                     .getNumericCellValue() == 1) {
                 return "зам. нач. кафедры";
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(11)
+            } else if ((int) sheet.getRow(rowNumber).getCell(11)
                     .getNumericCellValue() == 1) {
                 return "нач. цикла";//профессор
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(12)
+            } else if ((int) sheet.getRow(rowNumber).getCell(12)
                     .getNumericCellValue() == 1) {
                 return "нач. цикла";
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(13)
+            } else if ((int) sheet.getRow(rowNumber).getCell(13)
                     .getNumericCellValue() == 1) {
                 return "профессор";
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(14)
+            } else if ((int) sheet.getRow(rowNumber).getCell(14)
                     .getNumericCellValue() == 1) {
                 return "доцент";
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(15)
+            } else if ((int) sheet.getRow(rowNumber).getCell(15)
                     .getNumericCellValue() == 1) {
                 return "ст. преподаватель";
-            }
-            else if ((int)sheet.getRow(rowNumber).getCell(16)
+            } else if ((int) sheet.getRow(rowNumber).getCell(16)
                     .getNumericCellValue() == 1) {
                 return "преподаватель";
-            }
-            else {
+            } else {
                 System.err.println("NotAnError: GetCategory unknown type.");
                 return null;
             }
@@ -178,8 +175,8 @@ public class TableFileReader {
         int row;
 
         try {
-            for(row = 5; row < 31; row++) {
-                if(sheet.getRow(row).getCell(5).getStringCellValue()
+            for (row = 5; row < 31; row++) {
+                if (sheet.getRow(row).getCell(5).getStringCellValue()
                         .equals(p.getpName())) {
                     return row;
                 }
@@ -190,16 +187,16 @@ public class TableFileReader {
         }
         return 0;
     }
+
     public int[] GetAdditionalInfo1(Person p) {//вызов по объекту данного класса с соответствующим файлом, переданным в конструктор
         int[] infoArray = new int[10];
         int pRowNumber = GetRowByPerson(p);
         //доктор наук
         try {
-            if ((int)sheet.getRow(pRowNumber).getCell(19)
+            if ((int) sheet.getRow(pRowNumber).getCell(19)
                     .getNumericCellValue() == 1) {
                 infoArray[0] = 1;
-            }
-            else {
+            } else {
                 infoArray[0] = 0;
             }
 
@@ -210,11 +207,10 @@ public class TableFileReader {
 
         //кандидат наук
         try {
-            if ((int)sheet.getRow(pRowNumber).getCell(20)
+            if ((int) sheet.getRow(pRowNumber).getCell(20)
                     .getNumericCellValue() == 1) {
                 infoArray[1] = 1;
-            }
-            else {
+            } else {
                 infoArray[1] = 0;
             }
 
@@ -225,11 +221,11 @@ public class TableFileReader {
 
         //профессор
         try {
-            if (((int)sheet.getRow(pRowNumber).getCell(8)
-                    .getNumericCellValue() == 1) || ((int)sheet
+            if (((int) sheet.getRow(pRowNumber).getCell(8)
+                    .getNumericCellValue() == 1) || ((int) sheet
                     .getRow(pRowNumber).getCell(9).getNumericCellValue() == 1)
-                    || ((int)sheet.getRow(pRowNumber).getCell(11)
-                    .getNumericCellValue() == 1) || ((int)sheet
+                    || ((int) sheet.getRow(pRowNumber).getCell(11)
+                    .getNumericCellValue() == 1) || ((int) sheet
                     .getRow(pRowNumber).getCell(13).getNumericCellValue()
                     == 1)) {
                 infoArray[2] = 1;
@@ -243,7 +239,7 @@ public class TableFileReader {
 
         //доцент
         try {
-            if (((int)sheet.getRow(pRowNumber).getCell(10).getNumericCellValue() == 1) || ((int)sheet.getRow(pRowNumber).getCell(12).getNumericCellValue() == 1) || ((int)sheet.getRow(pRowNumber).getCell(14).getNumericCellValue() == 1)) {
+            if (((int) sheet.getRow(pRowNumber).getCell(10).getNumericCellValue() == 1) || ((int) sheet.getRow(pRowNumber).getCell(12).getNumericCellValue() == 1) || ((int) sheet.getRow(pRowNumber).getCell(14).getNumericCellValue() == 1)) {
                 infoArray[3] = 1;
             } else {
                 infoArray[3] = 0;
@@ -256,7 +252,7 @@ public class TableFileReader {
 
         //магистр
         try {
-            if ((int)sheet.getRow(pRowNumber).getCell(23)
+            if ((int) sheet.getRow(pRowNumber).getCell(23)
                     .getNumericCellValue() == 1) {
                 infoArray[4] = 1;
             } else {
@@ -272,15 +268,15 @@ public class TableFileReader {
         //24,25,26// вывести колво единиц для каждого(просуммировать) значение от нуля до 3
         try {
             int sum = 0;
-            if ((int)sheet.getRow(pRowNumber).getCell(10)
+            if ((int) sheet.getRow(pRowNumber).getCell(10)
                     .getNumericCellValue() == 1) {
                 sum = sum + 1;
             }
-            if ((int)sheet.getRow(pRowNumber).getCell(10)
+            if ((int) sheet.getRow(pRowNumber).getCell(10)
                     .getNumericCellValue() == 1) {
                 sum = sum + 1;
             }
-            if ((int)sheet.getRow(pRowNumber).getCell(10)
+            if ((int) sheet.getRow(pRowNumber).getCell(10)
                     .getNumericCellValue() == 1) {
                 sum = sum + 1;
             }
@@ -293,7 +289,7 @@ public class TableFileReader {
         ////////
         //уровень ппп
         try {
-            infoArray[6] = (int)sheet.getRow(pRowNumber)
+            infoArray[6] = (int) sheet.getRow(pRowNumber)
                     .getCell(46).getNumericCellValue();
         } catch (Exception e) {
             infoArray[6] = -1;//Ошибка получения информации
@@ -302,25 +298,24 @@ public class TableFileReader {
 
         //наличие квалификации пвш
         try {
-            if ((int)sheet.getRow(pRowNumber).getCell(27)
+            if ((int) sheet.getRow(pRowNumber).getCell(27)
                     .getNumericCellValue() == 1) {
                 infoArray[7] = 1;
             } else {
                 infoArray[7] = 0;
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             infoArray[7] = -1;
-           // FileException.callAlert("Некорректная информация касательно наличия уровня ПВШ!");
+            // FileException.callAlert("Некорректная информация касательно наличия уровня ПВШ!");
         }
 
         //прохождение квалификации ппс
         try {
-            if((int)sheet.getRow(pRowNumber).getCell(28)
+            if ((int) sheet.getRow(pRowNumber).getCell(28)
                     .getNumericCellValue() == 1) {
                 infoArray[8] = 1;
-            }
-            else {
+            } else {
                 infoArray[8] = 0;
             }
 
@@ -331,7 +326,7 @@ public class TableFileReader {
 
         //обучение в форме...
         try {
-            if (((int)sheet.getRow(pRowNumber).getCell(29).getNumericCellValue() == 1) || ((int)sheet.getRow(pRowNumber).getCell(30).getNumericCellValue() == 1) || ((int)sheet.getRow(pRowNumber).getCell(31).getNumericCellValue() == 1)) {
+            if (((int) sheet.getRow(pRowNumber).getCell(29).getNumericCellValue() == 1) || ((int) sheet.getRow(pRowNumber).getCell(30).getNumericCellValue() == 1) || ((int) sheet.getRow(pRowNumber).getCell(31).getNumericCellValue() == 1)) {
                 infoArray[9] = 1;
             } else {
                 infoArray[9] = 0;
@@ -354,7 +349,7 @@ public class TableFileReader {
          * 43 столбец*/
         try {
             infoArray[0] = Math.round(sheet.getRow(pRowNumber).getCell(51)
-                    .getNumericCellValue() * 100.00) / 100.00 ;
+                    .getNumericCellValue() * 100.00) / 100.00;
         } catch (Exception e) {
             infoArray[0] = -1;//Ошибка получения информации
             //FileException.callAlert("Некорректная информация в 43-ем столбце!");
@@ -385,7 +380,7 @@ public class TableFileReader {
          * 4
          * 47*/
         try {
-            infoArray[3] = Math.round( sheet.getRow(pRowNumber).getCell(59)
+            infoArray[3] = Math.round(sheet.getRow(pRowNumber).getCell(59)
                     .getNumericCellValue() * 100.00) / 100.00;
         } catch (Exception e) {
             infoArray[3] = -1;//Ошибка получения информации
@@ -478,7 +473,7 @@ public class TableFileReader {
          * 99,101,103
          * Если есть хотя бы одно значение отличное от нуля, +*/
         try {
-            if (((int)sheet.getRow(pRowNumber).getCell(134).getNumericCellValue() != 0) || ((int)sheet.getRow(pRowNumber).getCell(136).getNumericCellValue() != 0) || ((int)sheet.getRow(pRowNumber).getCell(138).getNumericCellValue() != 0)) {
+            if (((int) sheet.getRow(pRowNumber).getCell(134).getNumericCellValue() != 0) || ((int) sheet.getRow(pRowNumber).getCell(136).getNumericCellValue() != 0) || ((int) sheet.getRow(pRowNumber).getCell(138).getNumericCellValue() != 0)) {
                 infoArray[12] = 1;
             } else {
                 infoArray[12] = 0;
@@ -509,20 +504,22 @@ public class TableFileReader {
 
         return infoArray;
     }
+
     //////////////////////////////////////////
     //Chair Info
     public String GetUnivName() {
         try {
             return sheet.getRow(5).getCell(1).getStringCellValue();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("GetUnivName error!!!");
             return null;
         }
     }
+
     public String GetChName() {
         try {
             return sheet.getRow(5).getCell(2).getStringCellValue();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("GetChName error!!!");
             return null;
         }
@@ -533,7 +530,7 @@ public class TableFileReader {
             return Math.round(sheet.getRow(30)
                     .getCell(151).getNumericCellValue() * 100.00) / 100.00;
         } catch (Exception e) {
-           // FileException.callAlert("Некорректная информация в 115-ом столбце, 31-ой строке!");
+            // FileException.callAlert("Некорректная информация в 115-ом столбце, 31-ой строке!");
             return -1;
         }
     }
@@ -571,7 +568,7 @@ public class TableFileReader {
     public double GetChMatBase() {
         try {
             return Math.round(sheet.getRow(4).getCell(250).getNumericCellValue() * 100.00) / 100.00;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("GetChMatBase error!!!");
             return -1;
         }
@@ -579,8 +576,8 @@ public class TableFileReader {
 
     public double GetChIdWork() {
         try {
-            return Math.round(sheet.getRow(4).getCell(251).getNumericCellValue() * 100.00) / 100.00;
-        }catch (Exception e) {
+            return Math.round(sheet.getRow(5).getCell(251).getNumericCellValue() * 100.00) / 100.00;
+        } catch (Exception e) {
             System.err.println("GetChIdWork error!!!");
             return -1;
         }
@@ -588,8 +585,8 @@ public class TableFileReader {
 
     public double GetChSecurity() {
         try {
-            return Math.round(sheet.getRow(4).getCell(252).getNumericCellValue() * 100.00) / 100.00;
-        }catch (Exception e) {
+            return Math.round(sheet.getRow(5).getCell(252).getNumericCellValue() * 100.00) / 100.00;
+        } catch (Exception e) {
             System.err.println("GetChSecurity error!!!");
             return -1;
         }
@@ -598,7 +595,7 @@ public class TableFileReader {
     public double GetChRate() {
         try {
             return Math.round(sheet.getRow(4).getCell(253).getNumericCellValue() * 100.00) / 100.00;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("GetChRate error!!!");
             return -1;
         }
@@ -622,6 +619,7 @@ public class TableFileReader {
             return -1;
         }
     }
+
     private double GetImaginaryColumnValue(int[] cellsArray, int row) {
         try {
             double sum = 0;
@@ -643,10 +641,11 @@ public class TableFileReader {
             return -1;
         }
     }
+
     private double GetImaginaryColumnSum(int[] cellsArray, int personCount) {
         try {
             double sum = 0;
-            for(int i = 5; i < personCount + 5 ;i++) {
+            for (int i = 5; i < personCount + 5; i++) {
                 sum += GetImaginaryColumnValue(cellsArray, i);
             }
             return sum;
@@ -655,6 +654,7 @@ public class TableFileReader {
             return -1;
         }
     }
+
     private double GetLastValueInColumn(int cell) {
         try {
             return sheet.getRow(30).getCell(cell).getNumericCellValue();
@@ -663,16 +663,18 @@ public class TableFileReader {
             return -1;
         }
     }
+
     public double[] GetAdditionalInfoForChNpp() {
         double[] infoArray = new double[5];
         double NPPS = GetNPPS();
-        infoArray[0] = Math.round((GetImaginaryColumnSum(new int[] {19,20,21,22}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
-        infoArray[1] = Math.round((GetImaginaryColumnSum(new int[] {24,25,26}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
+        infoArray[0] = Math.round((GetImaginaryColumnSum(new int[]{19, 20, 21, 22}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
+        infoArray[1] = Math.round((GetImaginaryColumnSum(new int[]{24, 25, 26}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
         infoArray[2] = Math.round((GetLastValueInColumn(27) * 100 / NPPS) * 100.00) / 100.00;
         infoArray[3] = Math.round((GetLastValueInColumn(28) * 100 / NPPS) * 100.00) / 100.00;
         infoArray[4] = Math.round(GetLastValueInColumn(/*67 или 68*/66) * 100.00) / 100.00;
         return infoArray;
     }
+
     public double[] GetAdditionalInfoForChStudyWork() {
         double[] infoArray = new double[3];
         infoArray[0] = Math.round(GetLastValueInColumn(54) * 100.00) / 100.00;
@@ -680,6 +682,7 @@ public class TableFileReader {
         infoArray[2] = Math.round(GetLastValueInColumn(51) * 100.00) / 100.00;
         return infoArray;
     }
+
     public double[] GetAdditionalInfoForChMethodicalWork() {
         double[] infoArray = new double[3];
         double NPPS = GetNPPS();
@@ -688,20 +691,22 @@ public class TableFileReader {
         infoArray[2] = Math.round(GetLastValueInColumn(62) * 100.00) / 100.00;
         return infoArray;
     }
+
     public double[] GetAdditionalInfoForChSinceWork() {
         double[] infoArray = new double[8];
         double NPPS = GetNPPS();
         infoArray[0] = Math.round(GetLastValueInColumn(78) * 100.00) / 100.00;
         infoArray[1] = Math.round(GetLastValueInColumn(81) * 100.00) / 100.00;
-        infoArray[2] = Math.round((GetImaginaryColumnSum(new int[] {100}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
+        infoArray[2] = Math.round((GetImaginaryColumnSum(new int[]{100}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
         infoArray[3] = Math.round(GetLastValueInColumn(104) * 100.00) / 100.00;
         infoArray[4] = Math.round(GetLastValueInColumn(107) * 100.00) / 100.00;
         infoArray[5] = Math.round(GetLastValueInColumn(110) * 100.00) / 100.00;
-        infoArray[6] = Math.round((GetImaginaryColumnSum(new int[] {134, 136, 138}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
-        infoArray[7] = Math.round((GetImaginaryColumnSum(new int[] {143, 145, 147, 148}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
+        infoArray[6] = Math.round((GetImaginaryColumnSum(new int[]{134, 136, 138}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
+        infoArray[7] = Math.round((GetImaginaryColumnSum(new int[]{143, 145, 147, 148}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
 
         return infoArray;
     }
+
     public double[] GetAdditionalInfoForChMatBase() {
         double[] infoArray = new double[4];
         infoArray[0] = Math.round(sheet.getRow(4).getCell(241).getNumericCellValue() * 100.00) / 100.00;
@@ -710,6 +715,7 @@ public class TableFileReader {
         infoArray[3] = Math.round(sheet.getRow(4).getCell(246).getNumericCellValue() * 2 * 100.00) / 100.00;
         return infoArray;
     }
+
     public int[] GetInfoForChair(Person p) {//вызов по объекту данного класса с соответствующим файлом, переданным в конструктор
         int[] infoArray = new int[14];
         //int pRowNumber = GetRowByPerson(p);

@@ -18,9 +18,9 @@
           <TableColumn fx:id="chairColumn" prefWidth="114.0" text="Кафедра" />
             <TableColumn fx:id="rankColumn" prefWidth="143.0" text="Звание" />
             <TableColumn fx:id="nameColumn" prefWidth="165.0" text="ФИО" />
-            <TableColumn fx:id="rateColumn" prefWidth="141.0" text="Наименование" />
+            <TableColumn fx:id="rateColumn" prefWidth="141.0" text="Должность" />
             <TableColumn fx:id="categoryColumn" prefWidth="135.0" text="Рейтинг&#10;преподавателя" />
-            <TableColumn fx:id="rateQualColumn" prefWidth="150.0" text="Дополнительный&#10;рейтинг&#10;преподавателя" />
+            <TableColumn fx:id="rateQualColumn" prefWidth="150.0" text="Рейтинг&#10;реализации КТ" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

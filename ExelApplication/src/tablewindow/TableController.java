@@ -1,17 +1,16 @@
 package tablewindow;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import dbconnection.DbConnection;
+import dbconnection.information_from_db.EntityDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import reader.FileManager;
-import java.io.File;
+
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -22,14 +21,8 @@ public class TableController implements Initializable {
     private ListView<String> tableList;
 
     private ObservableList<String> listForAddingInformation;
-
     private String sqlQueryForGettingTable = "SELECT * FROM addedfiles";
-    private String sqlQueryForDeletingLineAddedFiles =
-            "DELETE FROM addedfiles where pathToFile = ?";
-    private String sqlQueryForDeletingLinePersons =
-            "DELETE FROM persons where pyear = ? and pchair = ?";
-    private String sqlQueryForDeletingLineChairs =
-            "DELETE FROM chairs where chairYear = ? and chairName = ?";
+    private static EntityDAO entityDAO = new EntityDAO();
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
@@ -39,7 +32,7 @@ public class TableController implements Initializable {
 
     public void addingInformationToList() {
         try {
-            Connection connection = (Connection) DbConnection.getConnection();
+            Connection connection = DbConnection.getConnection();
             this.listForAddingInformation = FXCollections.observableArrayList();
 
             try {
@@ -57,7 +50,7 @@ public class TableController implements Initializable {
             tableList.getSelectionModel()
                     .setSelectionMode(SelectionMode.MULTIPLE);
 
-        } catch (NullPointerException ex) { //calls when resultSet is empty.
+        } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
     }
@@ -67,53 +60,7 @@ public class TableController implements Initializable {
         listForDeletingInformation =
                 tableList.getSelectionModel().getSelectedItems();
 
-        deleteTableFromDatabase(listForDeletingInformation);
+        entityDAO.deleteDataFromDatabase(listForDeletingInformation);
         addingInformationToList();
-    }
-
-    public void deleteTableFromDatabase(ObservableList<String>
-                                                listForDeletingInformation) {
-        FileManager fileManager = new FileManager();
-        Connection connection = (Connection) DbConnection.getConnection();
-
-        try {
-
-            PreparedStatement preparedStatement1 =
-                    connection.prepareStatement(sqlQueryForDeletingLineAddedFiles);
-            PreparedStatement preparedStatement2 =
-                    connection.prepareStatement(sqlQueryForDeletingLinePersons);
-            PreparedStatement preparedStatement3 =
-                    connection.prepareStatement(sqlQueryForDeletingLineChairs);
-
-            for (int i = 0; i < listForDeletingInformation.size(); i++) {
-                String addingResult = listForDeletingInformation.get(i);
-                int lastIndex = addingResult.lastIndexOf('.');
-                int lastIndex1 = addingResult.lastIndexOf('\\');
-                String newAddingResult =
-                        addingResult.substring(0, lastIndex1);
-                int lastIndex2 = newAddingResult.lastIndexOf('\\');
-
-                int year = Integer.parseInt(newAddingResult
-                        .substring(lastIndex2 + 1));
-                String chair = addingResult
-                        .substring(lastIndex1 + 1, lastIndex);
-                preparedStatement1.setString(
-                        1, addingResult);
-                preparedStatement2.setInt(1, year);
-                preparedStatement2.setString(2, chair);
-                preparedStatement3.setInt(1, year);
-                preparedStatement3.setString(2, chair);
-
-                preparedStatement3.execute();
-                preparedStatement2.execute();
-                preparedStatement1.execute();
-
-                fileManager.DeleteFile(new File(addingResult));
-            }
-
-            preparedStatement1.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

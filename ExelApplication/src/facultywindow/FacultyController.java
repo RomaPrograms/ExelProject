@@ -26,72 +26,59 @@ import java.util.function.Predicate;
 
 public class FacultyController implements Initializable {
     @FXML
-    public TableView tableView;
+    private TableView tableView;
     @FXML
-    public TableColumn firstColumn;
+    private TableColumn firstColumn;
     @FXML
-    public TableColumn secondColumn;
+    private TableColumn secondColumn;
     @FXML
-    public TableColumn thirdColumn;
+    private TableColumn thirdColumn;
     @FXML
-    public TableColumn forthColumn;
+    private TableColumn forthColumn;
     @FXML
-    public TableColumn fifthColumn;
+    private TableColumn fifthColumn;
     @FXML
-    public TableColumn sixthColumn;
+    private TableColumn sixthColumn;
     @FXML
-    public TableColumn seventhColumn;
+    private TableColumn seventhColumn;
     @FXML
-    public TableColumn eighthColumn;
+    private TableColumn eighthColumn;
     @FXML
-    public TableColumn ninthColumn;
+    private TableColumn ninthColumn;
     @FXML
-    public TableColumn tenthColumn;
+    private TableColumn tenthColumn;
     @FXML
-    public TableColumn eleventhColumn;
+    private TableColumn eleventhColumn;
     @FXML
-    public TableColumn twelfthColumn;
+    private TableColumn twelfthColumn;
     @FXML
-    public TableColumn thirteenthColumn;
+    private TableColumn thirteenthColumn;
     @FXML
-    public Button backButton;
+    private Button backButton;
     @FXML
-    public Button additionalInformationButton;
+    private Button additionalInformationButton;
     @FXML
-    public ComboBox yearComboBox;
+    private ComboBox yearComboBox;
 
     public static ObservableList<Faculty> faculties
             = FXCollections.observableArrayList();
 
-    private ObservableList<String> yearCheckBoxList
-            = FXCollections.observableArrayList("2019", "2018", "2017",
-            "2016", "2015");
+    private static ObservableList<String> yearCheckBoxList;
 
-    private static FXMLLoader fxmlLoader = new FXMLLoader();
+    private Parent loader;
+    private FXMLLoader fxmlLoader = new FXMLLoader();
     private static EntityDAO entityDAO = new EntityDAO();
     private static String staticYear = "выбрать год";
     private static FilteredList<Faculty> filter;
 
-//    private static FacultyController facultyController = null;
-//
-//    private FacultyController() { }
-//
-//    public static FacultyController getFacultyController() {
-//        if (facultyController == null){
-//            facultyController = new FacultyController();
-//        }
-//        return facultyController;
-//    }
-///////////////////////////////////////////////////////////////////////////////
-//    public FacultyController(){
-//        if (facultyController == null) {
-//            facultyController = new FacultyController();
-//        }
-//    }
-//
-//    public static FacultyController getFacultyController() {
-//        return facultyController;
-//    }
+    public static void setYearCheckBoxList(int minYear, int maxYear) {
+        yearCheckBoxList = FXCollections.observableArrayList();
+        yearCheckBoxList.clear();
+
+        for (int i = minYear; i <= maxYear; i++) {
+            yearCheckBoxList.add(String.valueOf(i));
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { //когда будем получать инфу с базы данных, мы вставим в каждый
@@ -162,10 +149,8 @@ public class FacultyController implements Initializable {
     }
 
 
-
     @FXML
     public void exit() {
-        Parent loader = null;
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.hide();
 

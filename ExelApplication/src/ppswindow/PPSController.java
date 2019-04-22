@@ -19,10 +19,11 @@ import javafx.stage.Stage;
 import entity.Person;
 import ppswindow.ppswindowaddition.ppsAdditionController;
 import reader.TableFileReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class PPSController implements Initializable {
@@ -59,12 +60,9 @@ public class PPSController implements Initializable {
 
     ObservableList<String> categoryCheckBoxList =
             FXCollections.observableArrayList("любая", "профессор",
-                    "доцент", "преподаватель", "ст. преподаватель",
-                    "нач. цикла", "нач. кафедры");
+                    "доцент", "преподаватель", "ст. преподаватель");
 
-    public static ObservableList<String> yearCheckBoxList
-            = FXCollections.observableArrayList("2019", "2018", "2017",
-            "2016", "2015");
+    private static ObservableList<String> yearCheckBoxList;
 
 
     private Parent loader;
@@ -77,8 +75,10 @@ public class PPSController implements Initializable {
     private static String staticCategory = "любая";
     private static String staticSearchFild = "";
     private static EntityDAO entityDAO = new EntityDAO();
+    private static Map<String, List<String>> categoryMap = new HashMap<>();
 
-    public void setYearCheckBoxList(int minYear, int maxYear) {
+    public static void setYearCheckBoxList(int minYear, int maxYear) {
+        yearCheckBoxList = FXCollections.observableArrayList();
         yearCheckBoxList.clear();
 
         for (int i = minYear; i <= maxYear; i++) {
@@ -86,14 +86,27 @@ public class PPSController implements Initializable {
         }
     }
 
-    static int i = 0;
+    static {
+        List<String> list1 = new ArrayList<>();
+        list1.add("нач. кафедры");
+        list1.add("нач. цикла - профессор");
+        list1.add("профессор");
+        categoryMap.put("профессор", list1);
+        list1 = new ArrayList<>();
+        list1.add("зам. нач. кафедры");
+        list1.add("доцент");
+        list1.add("нач. цикла");
+        categoryMap.put("доцент", list1);
+        list1 = new ArrayList<>();
+        list1.add("ст. преподаватель");
+        categoryMap.put("ст. преподаватель", list1);
+        list1 = new ArrayList<>();
+        list1.add("преподаватель");
+        categoryMap.put("преподаватель", list1);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (i == 1) {
-            System.out.println("");
-        }
-        i++;
         this.categoryComboBox.setItems(categoryCheckBoxList);
         this.yearComboBox.setItems(yearCheckBoxList);
         this.categoryComboBox.setValue(staticCategory);
@@ -146,7 +159,7 @@ public class PPSController implements Initializable {
 
         this.yearComboBoxChangedByMe();
         if (!staticSearchFild.isEmpty()) {
-            filter.setPredicate((Predicate<? super Person>) (Person person) ->{
+            filter.setPredicate((Predicate<? super Person>) (Person person) -> {
                 if (person.getpCategory().equals(staticCategory)) {
                     if (chairRadioButton.isSelected()
                             && person.getpChair().contains(staticSearchFild)) {
@@ -165,7 +178,7 @@ public class PPSController implements Initializable {
             tableView.setItems(sort);
 
         } else {
-           this.categoryComboBoxChanged();
+            this.categoryComboBoxChanged();
         }
     }
 
@@ -182,7 +195,7 @@ public class PPSController implements Initializable {
         tableView.setItems(persons);
     }
 
-    public void yearComboBoxChangedByMe(){
+    public void yearComboBoxChangedByMe() {
         staticYear = yearComboBox.getValue().toString();
         persons.clear();
         persons = entityDAO.findPersonsByYear(staticYear);
@@ -196,9 +209,12 @@ public class PPSController implements Initializable {
     public void categoryComboBoxChanged() {
         String category = categoryComboBox.getValue().toString();
         if (!category.equals("любая")) {
+            final List<String> list = categoryMap.get(category);
             filter.setPredicate((Predicate<? super Person>) (Person person) -> {
-                if (person.getpCategory().equals(category)) {
-                    return true;
+                for(int i = 0; i < list.size(); i++) {
+                    if (person.getpCategory().equals(list.get(i))) {
+                        return true;
+                    }
                 }
                 return false;
             });
@@ -214,6 +230,11 @@ public class PPSController implements Initializable {
             SortedList<Person> sort = new SortedList<>(filter);
             sort.comparatorProperty().bind(tableView.comparatorProperty());
             tableView.setItems(sort);
+        }
+
+        if (!staticSearchFild.isEmpty()) {
+           staticSearchFild = "";
+           searchField.setText(staticSearchFild);
         }
 
         staticCategory = category;
@@ -254,25 +275,37 @@ public class PPSController implements Initializable {
                 }
             }
         } else {
+            final List<String> list = categoryMap.get(staticCategory);
             if (lastNameRadioButton.isSelected()) {
-                if (newValue.isEmpty() && person.getpCategory().
-                        equals(staticCategory)) {
-                    return true;
+                if (newValue.isEmpty()) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (person.getpCategory().equals(list.get(i))) {
+                            return true;
+                        }
+                    }
                 } else {
-                    if (person.pNameProperty().toString().contains(newValue)
-                            && person.getpCategory().
-                            equals(categoryComboBox.getValue())) {
-                        return true;
+                    if (person.pNameProperty().toString().contains(newValue)) {
+                        for (int i = 0; i < list.size(); i++) {
+                            if (person.getpCategory().equals(list.get(i))) {
+                                return true;
+                            }
+                        }
                     }
                 }
             } else {
-                if (newValue.isEmpty() && person.getpCategory().
-                        equals(staticCategory)) {
-                    return true;
+                if (newValue.isEmpty()) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (person.getpCategory().equals(list.get(i))) {
+                            return true;
+                        }
+                    }
                 } else {
-                    if (person.pChairProperty().toString().contains(newValue)
-                            && person.getpCategory().equals(staticCategory)) {
-                        return true;
+                    if (person.pChairProperty().toString().contains(newValue)) {
+                        for (int i = 0; i < list.size(); i++) {
+                            if (person.getpCategory().equals(list.get(i))) {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -316,7 +349,7 @@ public class PPSController implements Initializable {
     @FXML
     public void exit(ActionEvent event) {
         Stage stage = (Stage) chairRadioButton.getScene().getWindow();
-        stage.hide();
+        stage.close();
 
         fxmlLoader.setLocation(getClass().getResource("/mainwindow/sample.fxml"));
         try {
