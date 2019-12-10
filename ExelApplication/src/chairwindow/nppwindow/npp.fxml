@@ -64,7 +64,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="222.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Рейтинг кафедры" GridPane.rowIndex="4">
+            <Label layoutX="10.0" layoutY="222.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Средний рейтинг НПП ППС кафедры" GridPane.rowIndex="4">
                <font>
                   <Font size="22.0" />
                </font>

@@ -16,74 +16,78 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-   /* private static final String SQL1 = "CREATE TABLE addedfiles (\n" +
-            "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    yearOfTable INT,\n" +
-            "    chairName   VARCHAR,\n" +
-            "    pathToFile  VARCHAR\n" +
-            ");\n";
-    private static final String SQL2 = "CREATE TABLE chairs (\n" +
-            "    chairId       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    chairUnivName VARCHAR,\n" +
-            "    chairYear     INT,\n" +
-            "    chairName     VARCHAR,\n" +
-            "    chairNpp      DOUBLE,\n" +
-            "    chairSchool   DOUBLE,\n" +
-            "    chairMethodic DOUBLE,\n" +
-            "    chairScience  DOUBLE,\n" +
-            "    mathtechBase  DOUBLE,\n" +
-            "    chairIdeolog  DOUBLE,\n" +
-            "    chairSecurity DOUBLE,\n" +
-            "    chairRate     DOUBLE,\n" +
-            "    chairQual     DOUBLE,\n" +
-            "    addedFilesID  INT\n" +
-            ");";
-    private static final String SQL3 = "CREATE TABLE constants (\n" +
-            "    idconstants     INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    constStudy      DOUBLE,\n" +
-            "    constMethodical DOUBLE,\n" +
-            "    constScience    DOUBLE,\n" +
-            "    constMatBase    DOUBLE,\n" +
-            "    constIdeology   DOUBLE,\n" +
-            "    constVSandOBVS  DOUBLE,\n" +
-            "    constCMP        DOUBLE\n" +
-            ");\n";
-    private static final String SQL4 = "CREATE TABLE persons (\n" +
-            "    pid        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    pchair     VARCHAR,\n" +
-            "    pyear      INT,\n" +
-            "    prank      VARCHAR,\n" +
-            "    pname      VARCHAR,\n" +
-            "    pcategory  VARCHAR,\n" +
-            "    prate      DOUBLE,\n" +
-            "    prateQual  DOUBLE,\n" +
-            "    addedFiles INT\n" +
-            ");";*/
+//    private static final String SQL1 = "CREATE TABLE addedfiles (\n" +
+//            "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+//            "    yearOfTable INT,\n" +
+//            "    chairName   VARCHAR,\n" +
+//            "    pathToFile  VARCHAR\n" +
+//            ");\n";
+//    private static final String SQL2 = "CREATE TABLE chairs (\n" +
+//            "    chairId       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+//            "    chairUnivName VARCHAR,\n" +
+//            "    chairYear     INT,\n" +
+//            "    chairName     VARCHAR,\n" +
+//            "    chairNpp      DOUBLE,\n" +
+//            "    chairSchool   DOUBLE,\n" +
+//            "    chairMethodic DOUBLE,\n" +
+//            "    chairScience  DOUBLE,\n" +
+//            "    mathtechBase  DOUBLE,\n" +
+//            "    chairIdeolog  DOUBLE,\n" +
+//            "    chairSecurity DOUBLE,\n" +
+//            "    chairRate     DOUBLE,\n" +
+//            "    chairQual     DOUBLE,\n" +
+//            "    addedFilesID  INT\n" +
+//            ");";
+//    private static final String SQL3 = "CREATE TABLE constants (\n" +
+//            "    idconstants     INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+//            "    constStudy      DOUBLE,\n" +
+//            "    constMethodical DOUBLE,\n" +
+//            "    constScience    DOUBLE,\n" +
+//            "    constMatBase    DOUBLE,\n" +
+//            "    constIdeology   DOUBLE,\n" +
+//            "    constVSandOBVS  DOUBLE,\n" +
+//            "    constCMP        DOUBLE\n" +
+//            ");\n";
+//    private static final String SQL4 = "CREATE TABLE persons (\n" +
+//            "    pid        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+//            "    pchair     VARCHAR,\n" +
+//            "    pyear      INT,\n" +
+//            "    prank      VARCHAR,\n" +
+//            "    pname      VARCHAR,\n" +
+//            "    pcategory  VARCHAR,\n" +
+//            "    prate      DOUBLE,\n" +
+//            "    prateQual  DOUBLE,\n" +
+//            "    addedFiles INT\n" +
+//            ");";
+//    private static final String SQL5 = "INSERT INTO constants values"
+//            + " (1, 0, 0, 0, 0, 0, 0, 0)";
 
     static {
         File mainDir = new File("___Tables");
         if (!mainDir.exists()) {
             mainDir.mkdir();
-            /*Connection connection = DbConnection.getConnection();
-            try {
-                PreparedStatement stat = connection.prepareStatement(SQL1);
-                stat.executeUpdate();
-                stat = connection.prepareStatement(SQL2);
-                stat.executeUpdate();
-                stat = connection.prepareStatement(SQL3);
-                stat.executeUpdate();
-                stat = connection.prepareStatement(SQL4);
-                stat.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }*/
-
+//            Connection connection = DbConnection.getConnection();
+//            try {
+//                PreparedStatement stat = connection.prepareStatement(SQL1);
+//                stat.executeUpdate();
+//                stat = connection.prepareStatement(SQL2);
+//                stat.executeUpdate();
+//                stat = connection.prepareStatement(SQL3);
+//                stat.executeUpdate();
+//                stat = connection.prepareStatement(SQL4);
+//                stat.executeUpdate();
+//                stat = connection.prepareStatement(SQL5);
+//                stat.executeUpdate();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            } finally {
+//                try {
+//                    connection.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
         }
     }
 

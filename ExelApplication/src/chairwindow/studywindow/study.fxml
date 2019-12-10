@@ -22,7 +22,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Объем учебной работы кафедры (час)">
+            <Label prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Объем учебной работы кафедры утвержденный приказом (час)">
                <font>
                   <Font size="22.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="106.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Средний балл по качеству проведения учебных занятий (средний балл)" GridPane.rowIndex="2">
+            <Label layoutX="10.0" layoutY="106.0" prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Качество проведения учебных занятий (средний балл)" GridPane.rowIndex="2">
                <font>
                   <Font size="22.0" />
                </font>

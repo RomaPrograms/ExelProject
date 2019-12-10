@@ -130,7 +130,7 @@ public class PPSController implements Initializable {
                             getSelectedItem();
                     String path
                             = entityDAO.findPathToFileByChairAndYear(staticYear,
-                            person.getpChair());
+                            person.getpPath());
 
                     tableFileReader = new TableFileReader(new File(path));
 

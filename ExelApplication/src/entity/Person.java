@@ -3,10 +3,10 @@ package entity;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import reader.TableFileReader;
 
 public class Person {
     private SimpleIntegerProperty pId;
+    private SimpleStringProperty pPath;
     private SimpleStringProperty pChair;
     private SimpleStringProperty pRank;
     private SimpleStringProperty pName;
@@ -14,30 +14,16 @@ public class Person {
     private SimpleDoubleProperty pRate;
     private SimpleDoubleProperty pRateQual;
 
-    public Person(String pChair, String pRank, String pName,
+    public Person(String pPath, String pChair, String pRank, String pName,
                   String pCategory, double pRate, double pRateQual) {
         //this.pId = new SimpleIntegerProperty(pId);
+        this.pPath = new SimpleStringProperty(pPath);
         this.pChair = new SimpleStringProperty(pChair);
         this.pRank = new SimpleStringProperty(pRank);
         this.pName = new SimpleStringProperty(pName);
         this.pCategory = new SimpleStringProperty(pCategory);
         this.pRate = new SimpleDoubleProperty(pRate);
         this.pRateQual = new SimpleDoubleProperty(pRateQual);
-    }
-
-    public Person(int number, TableFileReader tfReader, int id) {
-        this.pId = new SimpleIntegerProperty(number);
-        this.pName = new SimpleStringProperty(
-                tfReader.GetNameFromFile(id + 4));
-        this.pChair = new SimpleStringProperty(tfReader.GetChairFromFile());
-        this.pRank = new SimpleStringProperty(
-                tfReader.GetRankFromFile(id + 4));
-        this.pCategory = new SimpleStringProperty(
-                tfReader.GetCategoryFromFile(id + 4));
-        this.pRate = new SimpleDoubleProperty(
-                tfReader.GetRatingFromFile(id + 4));
-        this.pRateQual = new SimpleDoubleProperty(
-                tfReader.GetQualRateFromFile(id + 4));
     }
 
     public double getpRateQual() {
@@ -62,6 +48,18 @@ public class Person {
 
     public void setpId(int pId) {
         this.pId.set(pId);
+    }
+
+    public String getpPath() {
+        return pPath.get();
+    }
+
+    public SimpleStringProperty pPathProperty() {
+        return pPath;
+    }
+
+    public void setpPath(String pPath) {
+        this.pPath.set(pPath);
     }
 
     public String getpChair() {

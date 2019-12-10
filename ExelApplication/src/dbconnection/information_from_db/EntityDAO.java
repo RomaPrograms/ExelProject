@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.List;
 
 public class EntityDAO extends AbstractDAO {
@@ -31,7 +32,8 @@ public class EntityDAO extends AbstractDAO {
             + " AND chairName = (?)";
 
     private static final String FIND_PERSONS_IN_DATABASE_BY_YEAR
-            = "SELECT p.pchair, p.prank, p.pname, p.pcategory, p.prate, p.prateQual FROM"
+            = "SELECT p.pchair, p.prank, p.pname, p.pcategory, p.prate, p.prateQual,"
+            + " a.chairName FROM"
             + " persons p inner join addedfiles a ON a.id = p.addedFiles where"
             + " a.yearOfTable = (?)";
 
@@ -93,7 +95,7 @@ public class EntityDAO extends AbstractDAO {
     private static final String FIND_INFORMATION_ABOUT_FACULTIES
             = "select chairUnivName, chairYear, avg(chairSchool), avg(chairMethodic),"
             + " avg(chairScience), avg(mathtechBase) from chairs group by"
-            + " chairUnivName,chairYear";
+            + " chairUnivName, chairYear";
 
     private String sqlQueryForDeletingLineAddedFiles =
             "DELETE FROM addedfiles where pathToFile = ?";
@@ -156,7 +158,8 @@ public class EntityDAO extends AbstractDAO {
             statement.setString(1, year);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Person(resultSet.getString(1),
+                list.add(new Person( resultSet.getString(7),
+                        resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
@@ -425,14 +428,10 @@ public class EntityDAO extends AbstractDAO {
 
                 faculty.setfName(resultSet.getString(1));
                 faculty.setfYear(resultSet.getInt(2));
-                faculty.setfSchoolWork(/*Double.parseDouble(df.format*/(Double
-                        .parseDouble(resultSet.getString(3)))/*)*/);
-                faculty.setfMethodicalWork(Double
-                        .parseDouble(resultSet.getString(4)));
-                faculty.setfSinceWork(Double
-                        .parseDouble(resultSet.getString(5)));
-                faculty.setfMatBase(Double
-                        .parseDouble(resultSet.getString(6)));
+                faculty.setfSchoolWork(Double.parseDouble(resultSet.getString(3)));
+                faculty.setfMethodicalWork(Double.parseDouble(resultSet.getString(4)));
+                faculty.setfSinceWork(Double.parseDouble(resultSet.getString(5)));
+                faculty.setfMatBase(Double.parseDouble(resultSet.getString(6)));
                 if (facultyConstants != null) {
                     faculty.setfConstantMatBase(facultyConstants
                             .getfConstantMatBase());
@@ -478,15 +477,15 @@ public class EntityDAO extends AbstractDAO {
                     facultyRate += (value + faculty.getfMatBase())/2 * 0.1;
                 }
 
-                faculty.setfRate(facultyRate);
+                faculty.setfRate(Math.round(facultyRate * 100d) / 100d);
                 faculties.add(faculty);
             }
             closeResultSet(resultSet);
             return faculties;
         } catch (NullPointerException ex) { //calls when resultSet is empty.
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             closePreparedStatement(statement);
         }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facultywindow.FacultyController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facultywindow.FacultyController">
    <children>
       <TableView fx:id="tableView" editable="true" layoutX="14.0" layoutY="97.0" prefHeight="488.0" prefWidth="938.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="97.0">
         <columns>
@@ -19,18 +19,18 @@
                   <TableColumn fx:id="thirdColumn" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
-            <TableColumn prefWidth="134.0" text="Методическая&#10;работа">
+            <TableColumn prefWidth="144.0" text="Методическая&#10;работа">
                <columns>
                   <TableColumn fx:id="forthColumn" prefWidth="65.0" text="R-ф" />
-                  <TableColumn fx:id="fifthColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="fifthColumn" prefWidth="58.0" text="R-к" />
                </columns>
             </TableColumn>
-            <TableColumn prefWidth="141.0" text="Идеологическая&#10;работа">
+            <TableColumn prefWidth="91.0" text="Идеологическая&#10;работа">
                <columns>
                   <TableColumn fx:id="sixthColumn" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
-            <TableColumn prefWidth="136.0" text="Научная&#10;работа">
+            <TableColumn prefWidth="181.0" text="Научная&#10;работа">
                <columns>
                   <TableColumn fx:id="seventhColumn" prefWidth="65.0" text="R-ф" />
                   <TableColumn fx:id="eighthColumn" prefWidth="65.0" text="R-к" />

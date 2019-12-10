@@ -77,7 +77,7 @@ public class ChairController implements Initializable {
         yearComboBox.setValue(staticYear);
         tableView.setEditable(true);
 
-        tableView.setOnMouseClicked(new EventHandler<>() {
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 if (t.getClickCount() == 2 && tableView.getSelectionModel().

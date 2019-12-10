@@ -671,7 +671,7 @@ public class TableFileReader {
         infoArray[1] = Math.round((GetImaginaryColumnSum(new int[]{24, 25, 26}, GetPersonCountFromFile()) * 100 / NPPS) * 100.00) / 100.00;
         infoArray[2] = Math.round((GetLastValueInColumn(27) * 100 / NPPS) * 100.00) / 100.00;
         infoArray[3] = Math.round((GetLastValueInColumn(28) * 100 / NPPS) * 100.00) / 100.00;
-        infoArray[4] = Math.round(GetLastValueInColumn(/*67 или 68*/66) * 100.00) / 100.00;
+        infoArray[4] = Math.round(sheet.getRow(30).getCell(151).getNumericCellValue() * 100.00) / 100.00;
         return infoArray;
     }
 

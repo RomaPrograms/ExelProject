@@ -215,4 +215,6 @@ public class Faculty {
     public void setfRate(double fRate) {
         this.fRate.set(fRate);
     }
+
+
 }

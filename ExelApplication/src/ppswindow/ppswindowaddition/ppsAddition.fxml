@@ -96,7 +96,7 @@
                                     <Font size="22.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="38.0" prefHeight="32.0" prefWidth="508.0" text="Прохождение квалификации ППС в течение 5 лет" GridPane.rowIndex="8">
+                              <Label layoutX="10.0" layoutY="38.0" prefHeight="32.0" prefWidth="641.0" text="Прохождение повышения квалификации в течение 5 лет" GridPane.rowIndex="8">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -142,7 +142,7 @@
                                  <font>
                                     <Font size="26.0" />
                                  </font></Label>
-                              <Label layoutX="10.0" layoutY="315.0" prefHeight="32.0" prefWidth="799.0" text="Наличие почётных научно-педагогических званий" GridPane.rowIndex="5">
+                              <Label layoutX="10.0" layoutY="315.0" prefHeight="32.0" prefWidth="799.0" text="Наличие почетных научно-педагогических званий" GridPane.rowIndex="5">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -189,7 +189,7 @@
                                     <Font size="22.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Выполненная учебная нагрузка (часы)" GridPane.rowIndex="2">
+                              <Label layoutX="10.0" layoutY="13.0" prefHeight="27.0" prefWidth="610.0" text="Выполненная учебная нагрузка (час)" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -301,7 +301,7 @@
                                  <font>
                                     <Font size="22.0" />
                                  </font></Label>
-                              <Label layoutX="10.0" layoutY="492.0" prefHeight="27.0" prefWidth="610.0" text="Участие в изобретательской и рационализаторской работе" GridPane.rowIndex="13">
+                              <Label layoutX="10.0" layoutY="492.0" prefHeight="32.0" prefWidth="745.0" text="Участие в изобретательской и рационализаторской работе (количество)" GridPane.rowIndex="13">
                                  <font>
                                     <Font size="22.0" />
                                  </font>

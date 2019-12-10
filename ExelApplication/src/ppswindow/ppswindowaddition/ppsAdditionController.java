@@ -89,7 +89,7 @@ public class ppsAdditionController implements Initializable {
         Stage stage = (Stage) yearLabel.getScene().getWindow();
         stage.hide();
 
-        fxmlLoader.setLocation(getClass().getResource("/ppswindow/Pps.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/ppswindow/pps.fxml"));
         try {
             loader = fxmlLoader.load();
         } catch (IOException e) {
@@ -100,6 +100,23 @@ public class ppsAdditionController implements Initializable {
         newStage.setTitle("Проект.");
         newStage.setScene(new Scene(loader));
         newStage.show();
+
+
+        //        Stage stage = (Stage) backButton.getScene().getWindow();
+        //        stage.hide();
+        //
+        //        fxmlLoader.setLocation(getClass().
+        //                getResource("/chairwindow/chair.fxml"));
+        //        try {
+        //            loader = fxmlLoader.load();
+        //        } catch (IOException e) {
+        //            e.printStackTrace();
+        //        }
+        //
+        //        Stage newStage = new Stage();
+        //        newStage.setTitle("Проект.");
+        //        newStage.setScene(new Scene(loader));
+        //        newStage.show();
     }
 
     public void setLabels(Person person, int[] mass1, double[] mass2, String year) {

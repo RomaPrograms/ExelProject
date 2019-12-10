@@ -75,8 +75,8 @@ public class MainController implements Initializable {
 
                 fileException.callAlert("Идёт загрузка, пожалуйста подождите" +
                         " и НЕ НАЖИМАЙТЕ НА КНОПКИ!");
-                for (var file : files) {
-                    String addingResult = fileManager.AddFile(file);
+                for (int i = 0; i < files.size(); i++) {
+                    String addingResult = fileManager.AddFile(files.get(i));
 
                     System.out.println(addingResult);
                     int lastIndex = addingResult.lastIndexOf('.');

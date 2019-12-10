@@ -23,7 +23,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Содействие МТБ нормам снабжения (процент)">
+            <Label prefHeight="66.0" prefWidth="556.0" style="-fx-wrap-text: true;" text="Соответствие МТБ нормам снабжения (процент)">
                <font>
                   <Font size="22.0" />
                </font>

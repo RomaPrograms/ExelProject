@@ -81,11 +81,12 @@ public class FacultyController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { //когда будем получать инфу с базы данных, мы вставим в каждый
-        //из факультетов инфу с константами.
+    public void initialize(URL location, ResourceBundle resources) {
+
+        faculties = entityDAO.getInformationAboutFaculties();
+
         this.yearComboBox.setItems(yearCheckBoxList);
         this.yearComboBox.setValue(staticYear);
-        faculties = entityDAO.getInformationAboutFaculties();
 
         this.firstColumn.setCellValueFactory(
                 new PropertyValueFactory<Faculty, String>("fName"));
@@ -114,7 +115,7 @@ public class FacultyController implements Initializable {
         this.thirteenthColumn.setCellValueFactory(
                 new PropertyValueFactory<Faculty, Double>("fRate"));
 
-        yearComboBoxChanged();
+        this.yearComboBoxChanged();
     }
 
     @FXML
