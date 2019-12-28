@@ -32,16 +32,6 @@ public class TableFileReader {
         }
     }
 
-    ///
-    public void GetLineFromTable(int row, int cell) {
-        try {
-            sheet.getRow(row).getCell(cell).getStringCellValue();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    ///
     public File getPath() {
         return path;
     }
@@ -68,45 +58,26 @@ public class TableFileReader {
         }
     }
 
-    public int GetPersonCountFromFile() { //Функция не имеет смысла, т.к. можно получить число людей из списка их имён(метод size())
+    public int GetPersonCountFromFile() {
         int i = 5;
-        try {
-            for (; i < 31; i++) {
-                sheet.getRow(i).getCell(5).getStringCellValue();
-            }
-        } catch (Exception e) {
+        for (; i < 31; i++) {
+            sheet.getRow(i).getCell(5).getStringCellValue();
         }
         return i - 5;
-    }
-
-    public ArrayList<String> GetPersonNameList() {
-        ArrayList<String> namesList = new ArrayList<>();
-        try {
-            for (int i = 5; i < 31; i++) {
-                namesList.add(sheet.getRow(i).getCell(5)
-                        .getStringCellValue());
-            }
-        } catch (Exception e) {
-        }
-        return namesList;
     }
 
     public String GetNameFromFile(int rowNumber) {
         try {
             return sheet.getRow(rowNumber).getCell(5).getStringCellValue();
         } catch (Exception e) {
-            //FileException.callAlert("This table has incorrect information about NAME OF PERSON!");
             return null;
         }
     }
 
-    public String GetRankFromFile(int rowNumber) {// isn't ready
+    public String GetRankFromFile(int rowNumber) {
         try {
-            String string = sheet.getRow(rowNumber).getCell(4).getStringCellValue();
             return sheet.getRow(rowNumber).getCell(4).getStringCellValue();
         } catch (Exception e) {
-            //FileException.callAlert("This table has incorrect information about RANK OF PERSON!");
-            //e.printStackTrace();
             return null;
         }
     }
@@ -117,8 +88,6 @@ public class TableFileReader {
             return Math.round(sheet.getRow(rowNumber).getCell(154)
                     .getNumericCellValue() * 100.00) / 100.00;
         } catch (Exception e) {
-//            FileException.callAlert("This table has incorrect information about RATING OF PERSON!");
-//            e.printStackTrace();
             return (Double) null;
         }
     }
@@ -165,12 +134,10 @@ public class TableFileReader {
                 return null;
             }
         } catch (Exception e) {
-            //FileException.callAlert("This table has incorrect information about CATEGORY OF PERSON!");
             return null;
         }
     }
 
-    //Ниже - методы для первой страницы второго экрана
     private int GetRowByPerson(Person p) {
         int row;
 
@@ -188,7 +155,7 @@ public class TableFileReader {
         return 0;
     }
 
-    public int[] GetAdditionalInfo1(Person p) {//вызов по объекту данного класса с соответствующим файлом, переданным в конструктор
+    public int[] GetAdditionalInfo1(Person p) {
         int[] infoArray = new int[10];
         int pRowNumber = GetRowByPerson(p);
         //доктор наук
@@ -202,7 +169,6 @@ public class TableFileReader {
 
         } catch (Exception e) {
             infoArray[0] = -1;
-            //FileException.callAlert("Некорректная информация касательно вопроса является ли человек Доктором Наук!");
         }
 
         //кандидат наук
@@ -216,7 +182,6 @@ public class TableFileReader {
 
         } catch (Exception e) {
             infoArray[1] = -1;
-            //FileException.callAlert("Некорректная информация касательно вопроса является ли человек Кандидатом Наук!");
         }
 
         //профессор
@@ -234,7 +199,6 @@ public class TableFileReader {
             }
         } catch (Exception e) {
             infoArray[2] = -1;
-            //FileException.callAlert("Некорректная информация касательно вопроса является ли человек Профессором!");
         }
 
         //доцент
@@ -247,7 +211,6 @@ public class TableFileReader {
 
         } catch (Exception e) {
             infoArray[3] = -1;
-            //FileException.callAlert("Некорректная информация касательно вопроса является ли человек Доцентом!");
         }
 
         //магистр
@@ -261,11 +224,9 @@ public class TableFileReader {
 
         } catch (Exception e) {
             infoArray[4] = -1;
-            //FileException.callAlert("Некорректная информация касательно вопроса является ли человек Магистром!");
         }
-        ////////
-        //Наличие почётных нацчных пед званий
-        //24,25,26// вывести колво единиц для каждого(просуммировать) значение от нуля до 3
+
+
         try {
             int sum = 0;
             if ((int) sheet.getRow(pRowNumber).getCell(10)
@@ -284,7 +245,6 @@ public class TableFileReader {
 
         } catch (Exception e) {
             infoArray[5] = -1;
-            //FileException.callAlert("Некорректная информация в столбцах 24, 25, 26 касательно наличия почётных званий!");
         }
         ////////
         //уровень ппп
@@ -293,7 +253,6 @@ public class TableFileReader {
                     .getCell(46).getNumericCellValue();
         } catch (Exception e) {
             infoArray[6] = -1;//Ошибка получения информации
-            //FileException.callAlert("Некорректная информация касательно уровня ППП!");
         }
 
         //наличие квалификации пвш
@@ -718,62 +677,6 @@ public class TableFileReader {
 
     public int[] GetInfoForChair(Person p) {//вызов по объекту данного класса с соответствующим файлом, переданным в конструктор
         int[] infoArray = new int[14];
-        //int pRowNumber = GetRowByPerson(p);
-
-        /*
-         * 1 номер каф
-         * 2 наименование
-         *
-         * 3. 115 столбец 31 строка
-         * НПП - новая функция(возврат: 5 параметра)
-         * 3.1
-         * Если в столбцах 19 20 21 22 есть хотя бы одна единица, то в строку
-         * мнимого столбцы вносим 1
-         * Суммируем мнимый столбец, умножаем на 100, делим на кол-во псс,
-         * а кол-во ппс: 8+..+16
-         * 3.2
-         * 24 25 26 аналогично 3.1
-         * 3.3
-         * 27столб 31 строка кмножаем на 100 делим на кол-во ппс
-         * 3.4
-         * 28столб 31 стррока умн га 100 делим на нппс
-         * 3.5
-         * 55столбец 31 строка вывод
-         *
-         * 4. 5U(FH)
-         * 4.1.
-         * 45столбец 31 строка
-         * 4.2
-         * 46 столбец 31 строка
-         * 4.3
-         * 43 столбец 31 строка
-         *
-         * 5. 16M(FU) вывести число
-         * 5.1 47 столб 31 строка*100 / нппс
-         * 5.2 49 столб 31 строка
-         * 5.3 50 столб 31 строка
-         *
-         * 6. IG print
-         * 6.1 57 ст 31 строка
-         * 6.2 60столб 31 строка
-         * 6.3 72 стобец если не равно 0, то считаем в мнимом столбце за 1.
-         * суммируем единицы * 100 / нппс
-         * 6.4 75 столбец 31 строка
-         * 6.5 78 столбец 31 строка
-         * 6.6 81 столбец 31 строка
-         * 6.7 99 101 103 если хотя бы в одном столбцеи не 0, то считаем как 1
-         * суммируем * 100 / нппс
-         * 6.8 108 110 112 113 аналогично *100 / нппс
-         *
-         *
-         * 7. 74b(IQ)
-         *
-         * 8. 77p(IT)
-         *
-         *
-         *
-         *
-         * * */
         return infoArray;
     }
 }
