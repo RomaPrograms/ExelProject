@@ -8,32 +8,32 @@ public class Faculty {
     private SimpleStringProperty fName;
     private SimpleIntegerProperty fYear;
     private SimpleDoubleProperty fSchoolWork;
-    private SimpleDoubleProperty fConstantSchoolWork;
+    private SimpleStringProperty fConstantSchoolWork;
     private SimpleDoubleProperty fMethodicalWork;
-    private SimpleDoubleProperty fConstantMethodicalWork;
-    private SimpleDoubleProperty fConstantIdWork;
+    private SimpleStringProperty fConstantMethodicalWork;
+    private SimpleStringProperty fConstantIdWork;
     private SimpleDoubleProperty fSinceWork;
-    private SimpleDoubleProperty fConstantSinceWork;
+    private SimpleStringProperty fConstantSinceWork;
     private SimpleDoubleProperty fMatBase;
-    private SimpleDoubleProperty fConstantMatBase;
-    private SimpleDoubleProperty fConstantVSandVPVO;
-    private SimpleDoubleProperty fConstantSMR;
+    private SimpleStringProperty fConstantMatBase;
+    private SimpleStringProperty fConstantVSandVPVO;
+    private SimpleStringProperty fConstantSMR;
     private SimpleDoubleProperty fRate;
 
     public Faculty() {
         this.fName = new SimpleStringProperty();
         this.fYear = new SimpleIntegerProperty();
         this.fSchoolWork = new SimpleDoubleProperty();
-        this.fConstantSchoolWork = new SimpleDoubleProperty();
+        this.fConstantSchoolWork = new SimpleStringProperty();
         this.fMethodicalWork = new SimpleDoubleProperty();
-        this.fConstantMethodicalWork = new SimpleDoubleProperty();
-        this.fConstantIdWork = new SimpleDoubleProperty();
+        this.fConstantMethodicalWork = new SimpleStringProperty();
+        this.fConstantIdWork = new SimpleStringProperty();
         this.fSinceWork = new SimpleDoubleProperty();
-        this.fConstantSinceWork = new SimpleDoubleProperty();
+        this.fConstantSinceWork = new SimpleStringProperty();
         this.fMatBase = new SimpleDoubleProperty();
-        this.fConstantMatBase = new SimpleDoubleProperty();
-        this.fConstantVSandVPVO = new SimpleDoubleProperty();
-        this.fConstantSMR = new SimpleDoubleProperty();
+        this.fConstantMatBase = new SimpleStringProperty();
+        this.fConstantVSandVPVO = new SimpleStringProperty();
+        this.fConstantSMR = new SimpleStringProperty();
         this.fRate = new SimpleDoubleProperty();
     }
 
@@ -48,87 +48,87 @@ public class Faculty {
         this.fRate = new SimpleDoubleProperty(fRate);
     }
 
-    public double getfConstantSchoolWork() {
+    public String getfConstantSchoolWork() {
         return fConstantSchoolWork.get();
     }
 
-    public SimpleDoubleProperty fConstantSchoolWorkProperty() {
+    public SimpleStringProperty fConstantSchoolWorkProperty() {
         return fConstantSchoolWork;
     }
 
-    public void setfConstantSchoolWork(double fConstantSchoolWork) {
+    public void setfConstantSchoolWork(String fConstantSchoolWork) {
         this.fConstantSchoolWork.set(fConstantSchoolWork);
     }
 
-    public double getfConstantMethodicalWork() {
-        return fConstantMethodicalWork.get();
-    }
-
-    public SimpleDoubleProperty fConstantMethodicalWorkProperty() {
-        return fConstantMethodicalWork;
-    }
-
-    public void setfConstantMethodicalWork(double fConstantMethodicalWork) {
-        this.fConstantMethodicalWork.set(fConstantMethodicalWork);
-    }
-
-    public double getfConstantIdWork() {
+    public String getfConstantIdWork() {
         return fConstantIdWork.get();
     }
 
-    public SimpleDoubleProperty fConstantIdWorkProperty() {
+    public SimpleStringProperty fConstantIdWorkProperty() {
         return fConstantIdWork;
     }
 
-    public void setfConstantIdWork(double fConstantIdWork) {
+    public void setfConstantIdWork(String fConstantIdWork) {
         this.fConstantIdWork.set(fConstantIdWork);
     }
 
-    public double getfConstantSinceWork() {
+    public String getfConstantMethodicalWork() {
+        return fConstantMethodicalWork.get();
+    }
+
+    public SimpleStringProperty fConstantMethodicalWorkProperty() {
+        return fConstantMethodicalWork;
+    }
+
+    public void setfConstantMethodicalWork(String fConstantMethodicalWork) {
+        this.fConstantMethodicalWork.set(fConstantMethodicalWork);
+    }
+
+    public String getfConstantSinceWork() {
         return fConstantSinceWork.get();
     }
 
-    public SimpleDoubleProperty fConstantSinceWorkProperty() {
+    public SimpleStringProperty fConstantSinceWorkProperty() {
         return fConstantSinceWork;
     }
 
-    public void setfConstantSinceWork(double fConstantSinceWork) {
+    public void setfConstantSinceWork(String fConstantSinceWork) {
         this.fConstantSinceWork.set(fConstantSinceWork);
     }
 
-    public double getfConstantMatBase() {
+    public String getfConstantMatBase() {
         return fConstantMatBase.get();
     }
 
-    public SimpleDoubleProperty fConstantMatBaseProperty() {
+    public SimpleStringProperty fConstantMatBaseProperty() {
         return fConstantMatBase;
     }
 
-    public void setfConstantMatBase(double fConstantMatBase) {
+    public void setfConstantMatBase(String fConstantMatBase) {
         this.fConstantMatBase.set(fConstantMatBase);
     }
 
-    public double getfConstantVSandVPVO() {
+    public String getfConstantVSandVPVO() {
         return fConstantVSandVPVO.get();
     }
 
-    public SimpleDoubleProperty fConstantVSandVPVOProperty() {
+    public SimpleStringProperty fConstantVSandVPVOProperty() {
         return fConstantVSandVPVO;
     }
 
-    public void setfConstantVSandVPVO(double fConstantVSandVPVO) {
+    public void setfConstantVSandVPVO(String fConstantVSandVPVO) {
         this.fConstantVSandVPVO.set(fConstantVSandVPVO);
     }
 
-    public double getfConstantSMR() {
+    public String getfConstantSMR() {
         return fConstantSMR.get();
     }
 
-    public SimpleDoubleProperty fConstantSMRProperty() {
+    public SimpleStringProperty fConstantSMRProperty() {
         return fConstantSMR;
     }
 
-    public void setfConstantSMR(double fConstantSMR) {
+    public void setfConstantSMR(String fConstantSMR) {
         this.fConstantSMR.set(fConstantSMR);
     }
 

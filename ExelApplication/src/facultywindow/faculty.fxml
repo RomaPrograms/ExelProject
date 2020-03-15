@@ -16,40 +16,40 @@
           <TableColumn prefWidth="167.0" text="Учебная&#10;работа">
                <columns>
                   <TableColumn fx:id="secondColumn" prefWidth="65.0" text="R-ф" />
-                  <TableColumn fx:id="thirdColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="thirdColumn" onEditCommit="#constantSchoolValueChanged" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="144.0" text="Методическая&#10;работа">
                <columns>
                   <TableColumn fx:id="forthColumn" prefWidth="65.0" text="R-ф" />
-                  <TableColumn fx:id="fifthColumn" prefWidth="58.0" text="R-к" />
+                  <TableColumn fx:id="fifthColumn" onEditCommit="#constantMethodicalValueChanged" prefWidth="58.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="91.0" text="Идеологическая&#10;работа">
                <columns>
-                  <TableColumn fx:id="sixthColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="sixthColumn" onEditCommit="#constantIdeologyValueChanged" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="181.0" text="Научная&#10;работа">
                <columns>
                   <TableColumn fx:id="seventhColumn" prefWidth="65.0" text="R-ф" />
-                  <TableColumn fx:id="eighthColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="eighthColumn" onEditCommit="#constantScienceValueChanged" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="138.0" text="МТБ">
                <columns>
                   <TableColumn fx:id="ninthColumn" prefWidth="65.0" text="R-ф" />
-                  <TableColumn fx:id="tenthColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="tenthColumn" onEditCommit="#constantMTBValueChanged" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="87.0" text="ВС и&#10;ОБВС">
                <columns>
-                  <TableColumn fx:id="eleventhColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="eleventhColumn" onEditCommit="#constantOBVSValueChanged" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="75.0" text="СМР">
                <columns>
-                  <TableColumn fx:id="twelfthColumn" prefWidth="65.0" text="R-к" />
+                  <TableColumn fx:id="twelfthColumn" onEditCommit="#constantCMPValueChanged" prefWidth="65.0" text="R-к" />
                </columns>
             </TableColumn>
             <TableColumn prefWidth="83.0" text="Рейтинг">
@@ -70,6 +70,6 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Button fx:id="refreshButton" layoutX="607.0" layoutY="13.0" mnemonicParsing="false" onAction="#refresh" prefHeight="70.0" prefWidth="166.0" text="Обновить" />
+      <Button fx:id="refreshButton" layoutX="607.0" layoutY="13.0" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="70.0" prefWidth="184.0" text="Сохранить изменения" />
    </children>
 </AnchorPane>

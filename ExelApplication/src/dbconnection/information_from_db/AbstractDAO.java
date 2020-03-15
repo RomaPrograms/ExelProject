@@ -5,7 +5,7 @@ import java.sql.Connection;
 import dbconnection.DbConnection;
 import entity.Chair;
 import entity.Faculty;
-import entity.FacultyConstants;
+import entity.Commission;
 import entity.Person;
 import javafx.collections.ObservableList;
 
@@ -39,8 +39,6 @@ public abstract class AbstractDAO {
                                                double CMP);
 
     public abstract ObservableList<Faculty> getInformationAboutFaculties();
-
-    public abstract FacultyConstants getFacultyConstants();
 
     public abstract int getMaxYearOfTables();
 

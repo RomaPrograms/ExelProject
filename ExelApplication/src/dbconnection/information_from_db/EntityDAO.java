@@ -2,7 +2,7 @@ package dbconnection.information_from_db;
 
 import entity.Chair;
 import entity.Faculty;
-import entity.FacultyConstants;
+import entity.Commission;
 import entity.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntityDAO extends AbstractDAO {
@@ -103,6 +103,24 @@ public class EntityDAO extends AbstractDAO {
             "DELETE FROM persons where addedFiles = (SELECT id FROM addedfiles WHERE pathToFile = ?)";
     private String sqlQueryForDeletingLineChairs =
             "DELETE FROM chairs where addedFilesId = (SELECT id FROM addedfiles WHERE pathToFile = ?)";
+
+    private String FIND_COMMISSION_BY_UNIVNAME_AND_CHAIR_YEAR
+            = "select commissionStudy, commissionMethodical, commissionScience, commissionMatBase," +
+            " commissionIdeology, commissionVSandOBVS, commissionCMP from commission" +
+            " where chairYear = ? and chairUnivName = ?";
+
+    private String UPDATE_COMMISSION_BY_UNIVNAME_AND_CHAIR_YEAR
+            = "update commission set commissionStudy = (?), commissionMethodical = (?)," +
+            " commissionScience = (?), commissionMatBase = (?), commissionIdeology = (?)," +
+            " commissionVSandOBVS = (?), commissionCMP = (?)" +
+            " where chairYear = ? and chairUnivName = ?";
+
+    private String ADD_COMMISSION
+            = "insert into commission (chairUnivName, chairYear) values " +
+            "(?, ?)";
+
+    private String DELETE_COMMISSSION
+            = "DELETE FROM commission where chairUnivName = ? and chairYear = ?";
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
@@ -236,6 +254,9 @@ public class EntityDAO extends AbstractDAO {
             addDataToAddedFilesDatabase(year, name, pathToFile);
             addDataToPersonsDatabase(year, name, tableFileReader);
             addDataToChairDatabase(year, name, tableFileReader);
+            if(!isCommissionExist(tableFileReader.GetUnivName(), year)) {
+                addCommission(tableFileReader.GetUnivName(), year);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -379,31 +400,6 @@ public class EntityDAO extends AbstractDAO {
         }
     }
 
-    @Override
-    public FacultyConstants getFacultyConstants() {
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement
-                    = connection.prepareStatement(SELECT_CONSTANTS);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return new FacultyConstants(resultSet.getDouble(2),
-                        resultSet.getDouble(3),
-                        resultSet.getDouble(4),
-                        resultSet.getDouble(5),
-                        resultSet.getDouble(6),
-                        resultSet.getDouble(7),
-                        resultSet.getDouble(8));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePreparedStatement(preparedStatement);
-        }
-
-        return null;
-    }
-
     private void deleteDataFromConstants() throws SQLException {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(DELETE_DATA_FROM_CONSTANTS);
@@ -416,7 +412,6 @@ public class EntityDAO extends AbstractDAO {
         ObservableList<Faculty> faculties = FXCollections.observableArrayList();
 
         PreparedStatement statement = null;
-        FacultyConstants facultyConstants = getFacultyConstants();
         try {
             statement = connection.prepareStatement(
                     FIND_INFORMATION_ABOUT_FACULTIES);
@@ -426,51 +421,58 @@ public class EntityDAO extends AbstractDAO {
                 Faculty faculty = new Faculty();
                 facultyRate = 0;
 
+                System.out.println(resultSet.getString(1));
+                System.out.println(resultSet.getInt(2));
+
+                Commission commission = findCommissionByUnivNameAndChairYear(
+                        resultSet.getString(1),
+                        resultSet.getInt(2));
+
                 faculty.setfName(resultSet.getString(1));
                 faculty.setfYear(resultSet.getInt(2));
                 faculty.setfSchoolWork(Double.parseDouble(resultSet.getString(3)));
                 faculty.setfMethodicalWork(Double.parseDouble(resultSet.getString(4)));
                 faculty.setfSinceWork(Double.parseDouble(resultSet.getString(5)));
                 faculty.setfMatBase(Double.parseDouble(resultSet.getString(6)));
-                if (facultyConstants != null) {
-                    faculty.setfConstantMatBase(facultyConstants
+                if (commission != null) {
+                    faculty.setfConstantMatBase(commission
                             .getfConstantMatBase());
-                    faculty.setfConstantMethodicalWork(facultyConstants
+                    faculty.setfConstantMethodicalWork(commission
                             .getfConstantMethodicalWork());
-                    faculty.setfConstantSinceWork(facultyConstants
+                    faculty.setfConstantSinceWork(commission
                             .getfConstantSinceWork());
-                    faculty.setfConstantIdWork(facultyConstants
+                    faculty.setfConstantIdWork(commission
                             .getfConstantIdWork());
-                    faculty.setfConstantSchoolWork(facultyConstants
+                    faculty.setfConstantSchoolWork(commission
                             .getfConstantSchoolWork());
-                    faculty.setfConstantSMR(facultyConstants
+                    faculty.setfConstantSMR(commission
                             .getfConstantSMR());
-                    faculty.setfConstantVSandVPVO(facultyConstants
+                    faculty.setfConstantVSandVPVO(commission
                             .getfConstantVSandVPVO());
                 }
 
-                double value = faculty.getfConstantSchoolWork();
+                double value = Double.parseDouble(faculty.getfConstantSchoolWork());
                 if (value == 0) {
                     facultyRate += faculty.getfSchoolWork() * 0.25;
                 } else {
                     facultyRate += (value + faculty.getfSchoolWork())/2 * 0.25;
                 }
-                value = faculty.getfConstantMethodicalWork();
+                value = Double.parseDouble(faculty.getfConstantMethodicalWork());
                 if (value == 0) {
                     facultyRate += faculty.getfMethodicalWork() * 0.2;
                 } else {
                     facultyRate += (value + faculty.getfMethodicalWork())/2 * 0.2;
                 }
-                value = faculty.getfConstantSinceWork();
+                value = Double.parseDouble(faculty.getfConstantSinceWork());
                 if (value == 0) {
                     facultyRate += faculty.getfSinceWork() * 0.15;
                 } else {
                     facultyRate += (value + faculty.getfSinceWork())/2 * 0.15;
                 }
 
-                facultyRate += faculty.getfConstantIdWork() * 0.2;
+                facultyRate += Double.parseDouble(faculty.getfConstantIdWork()) * 0.2;
 
-                value = faculty.getfConstantMatBase();
+                value = Double.parseDouble(faculty.getfConstantMatBase());
                 if (value == 0) {
                     facultyRate += faculty.getfMatBase() * 0.1;
                 } else {
@@ -491,6 +493,77 @@ public class EntityDAO extends AbstractDAO {
         }
 
         return faculties;
+    }
+
+    public Commission findCommissionByUnivNameAndChairYear(String univName, int year) {
+        Commission commission = null;
+        PreparedStatement statement = null;
+        try {
+            statement = connection
+                    .prepareStatement(FIND_COMMISSION_BY_UNIVNAME_AND_CHAIR_YEAR);
+            statement.setInt(1, year);
+            statement.setString(2, univName);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                commission = new Commission();
+                commission.setfConstantSchoolWork(resultSet.getString(1));
+                commission.setfConstantMethodicalWork(resultSet.getString(2));
+                commission.setfConstantSinceWork(resultSet.getString(3));
+                commission.setfConstantMatBase(resultSet.getString(4));
+                commission.setfConstantIdWork(resultSet.getString(5));
+                commission.setfConstantVSandVPVO(resultSet.getString(6));
+                commission.setfConstantSMR(resultSet.getString(7));
+            }
+            closeResultSet(resultSet);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+        }
+        return commission;
+    }
+
+    public boolean isCommissionExist(String univName, int year) {
+        Commission commission = findCommissionByUnivNameAndChairYear(univName, year);
+        return commission == null ? false : true;
+    }
+
+    public void updateCommissionByCairNameAndChairYear(Commission commission) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection
+                    .prepareStatement(UPDATE_COMMISSION_BY_UNIVNAME_AND_CHAIR_YEAR);
+            statement.setString(1, commission.getfConstantSchoolWork());
+            statement.setString(2, commission.getfConstantMethodicalWork());
+            statement.setString(3, commission.getfConstantSinceWork());
+            statement.setString(4, commission.getfConstantMatBase());
+            statement.setString(5, commission.getfConstantIdWork());
+            statement.setString(6, commission.getfConstantVSandVPVO());
+            statement.setString(7, commission.getfConstantSMR());
+            statement.setInt(8, commission.getChairYear());
+            statement.setString(9, commission.getChairUnivName());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+        }
+    }
+
+    public void addCommission(String univName, int year) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection
+                    .prepareStatement(ADD_COMMISSION);
+            statement.setString(1, univName);
+            statement.setInt(2, year);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+        }
     }
 
     @Override

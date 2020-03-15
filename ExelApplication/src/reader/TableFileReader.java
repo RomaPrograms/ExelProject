@@ -2,7 +2,6 @@ package reader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import entity.Person;
 import org.apache.poi.EncryptedDocumentException;
@@ -60,8 +59,11 @@ public class TableFileReader {
 
     public int GetPersonCountFromFile() {
         int i = 5;
-        for (; i < 31; i++) {
-            sheet.getRow(i).getCell(5).getStringCellValue();
+        try {
+            for (; i < 31; i++) {
+                sheet.getRow(i).getCell(5).getStringCellValue();
+            }
+        } catch (Exception e) {
         }
         return i - 5;
     }

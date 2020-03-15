@@ -8,6 +8,7 @@ import exception.FileException;
 import facultywindow.FacultyController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -64,13 +65,25 @@ public class MainController implements Initializable {
                     fileChooser.showOpenMultipleDialog(null);
 
             if (files != null) {
-                fileException.alert.setOnCloseRequest(event -> {
+                fileException.alert.setOnCloseRequest(new EventHandler<DialogEvent>() {
+                    @Override
+                    public void handle(DialogEvent event) {
+                    }
                 });
-                fileException.alert.setOnHiding(event -> {
+                fileException.alert.setOnHiding(new EventHandler<DialogEvent>() {
+                    @Override
+                    public void handle(DialogEvent event) {
+                    }
                 });
-                fileException.alert.setOnShowing(event -> {
+                fileException.alert.setOnShowing(new EventHandler<DialogEvent>() {
+                    @Override
+                    public void handle(DialogEvent event) {
+                    }
                 });
-                fileException.alert.setOnShown(event -> {
+                fileException.alert.setOnShown(new EventHandler<DialogEvent>() {
+                    @Override
+                    public void handle(DialogEvent event) {
+                    }
                 });
 
                 fileException.callAlert("Идёт загрузка, пожалуйста подождите" +
